@@ -6,3 +6,8 @@ export const QuestionsCTX = createContext({
     loading: false,
     ready: false,
 });
+
+export const TimeCTX = createContext({
+    time: 30,
+    setTime: (time: number) => {},
+});

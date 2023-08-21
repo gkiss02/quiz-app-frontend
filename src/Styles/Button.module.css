@@ -1,0 +1,30 @@
+.button {
+    outline: none;
+    border: none;
+    color: white;
+    width: 10rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 2rem;
+    float: right;
+    cursor: pointer;
+}
+
+.blue-button {
+    background-color: #3eb8d4;
+    margin-left: 1rem;
+}
+
+.blue-button:hover {
+    background-color: #058aa7;
+}
+
+.red-button {
+    background-color: #FF5341;
+}
+
+.red-button:hover {
+    background-color: #c13b2e;
+}

@@ -2,6 +2,7 @@
     font-size: 1.5rem;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     border-radius: 10px;
     border: 1.5px solid var(--grey);
     margin-top: 1.25rem;
@@ -10,14 +11,46 @@
 }
 
 .circle {
-    width: 1.5rem;
-    height: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1rem;
+    height: 1rem;
     border-radius: 100%;
     border: 1.5px solid var(--grey);
     background-color: white;
+    padding: .5rem;
 }
 
-.container:hover {
+.hover:hover {
     cursor: pointer;
     background-color: var(--grey);
+}
+
+.selected {
+    border: 1.5px solid var(--text-blue);
+    background-color: #DCF8FF;
+}
+
+.correct-answer {
+    border: 1.5px solid var(--green);
+    background-color: #E9FDF0;
+}
+
+.wrong-answer {
+    border: 1.5px solid var(--red);
+    background-color: #FFECEC;
+}
+
+.wrong-circle {
+    background-color: var(--red);
+}
+
+.correct-circle {
+    background-color: var(--green);
+}
+
+.icon {
+    font-size: 1.25rem;
+    color: white;
 }

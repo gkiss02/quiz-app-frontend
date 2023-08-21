@@ -2,23 +2,53 @@ import FilledBar from "../Components/FilledBar/FilledBar";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faX } from '@fortawesome/free-solid-svg-icons'
 import styles from './Question.module.css';
+import buttonStyles from '../Styles/Button.module.css'
 import Timer from "../Components/Timer/Timer";
 import Answer from "../Components/Answer/Answer";
-import { useState, useContext } from "react";
-import { QuestionsCTX } from "../Context/Context";
+import { useState, useContext, useEffect } from "react";
+import { QuestionsCTX, TimeCTX } from "../Context/Context";
+import TimeOutModal from "../Components/TimeOutModal/TimeOutModal";
 
 function Question () {
     const questionsCTX = useContext(QuestionsCTX);
     const [questionCounter, setQuestionCounter] = useState(0);
     const actualQuestion = questionsCTX.questions[questionCounter];
+    const [isChecked, setIsChecked] = useState(false);
+    const [selected, isSelected] = useState('');
+    const timeCTX = useContext(TimeCTX);
+    const [counter, setCounter] = useState(timeCTX.time);
+    const [visible, setVisible] = useState(false);
 
-    function clickHandle () {
-        setQuestionCounter(questionCounter + 1);
+    function checkHandle () {
+        setIsChecked(true);
     }
 
-    const answers = [];
+    function nextHandle () {
+        setCounter(timeCTX.time);
+        setQuestionCounter(questionCounter + 1);
+        setIsChecked(false);
+        setVisible(false);
+    }
+
+    function setSelected (element: string) {
+        isSelected(element);
+    }
+
+    const answers: string[] = [];
     answers.push(actualQuestion.correct_answer, ...actualQuestion.incorrect_answers);
-    answers.sort(() => Math.random() - 0.5);
+
+    useEffect(() => {
+        if (!isChecked && counter > 0) {
+            const timeout = setTimeout(() => {
+                setCounter(counter - 1);
+            }, 1000);
+            return () => clearTimeout(timeout);
+        }
+        if (counter == 0 && !isChecked) {
+            setIsChecked(true);
+            setVisible(true)
+        }
+    }, [counter, isChecked]);
 
     return (
         <div className={styles.container}>
@@ -27,15 +57,26 @@ function Question () {
                 <FilledBar numberOfQuestions={questionsCTX.questions.length} actual={questionCounter + 1}></FilledBar>
             </div>
             <div className={styles['timer-container']}>
-                <Timer></Timer>
+                <Timer time={counter}></Timer>
             </div>
             <div className={styles['question-container']}>
-                <h2>{actualQuestion.question}</h2>
+                <h2 className={styles.text}>{actualQuestion.question}</h2>
             </div>
-            {answers.map((answer) => 
-                <Answer answer={answer}></Answer>
+            {answers.map((answer, index) => 
+                <Answer
+                    key={index} 
+                    answer={answer} 
+                    setSelected={setSelected} 
+                    selected={selected}
+                    correctAnswer={actualQuestion.correct_answer == answer && isChecked}
+                    wrongAnswer={actualQuestion.correct_answer != answer && isChecked}
+                    isChecked={isChecked}
+                />
             )}
-            <button className={styles.button} onClick={clickHandle}>Next</button>
+            <button className={`${buttonStyles.button} ${buttonStyles['blue-button']}`} onClick={isChecked ? nextHandle : checkHandle}>
+                {isChecked ? 'Next' : 'Check'}
+            </button>
+            {visible && <TimeOutModal nextHandle={nextHandle}></TimeOutModal>}
         </div>
     )
 }

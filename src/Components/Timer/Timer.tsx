@@ -1,12 +1,12 @@
 import styles from './Timer.module.css';
 
-function Timer () {
+const Timer: React.FC <({time: number})> = (props) => {
     return ( 
         <div className={styles.container}>
             <div className={styles['circle-container']}>
                 <div className={styles.bar}>
                     <div className={styles['inner-circle']}>
-                        <p className={styles.text}>30</p>
+                        <p className={styles.text}>{props.time}</p>
                     </div>
                 </div>
             </div>

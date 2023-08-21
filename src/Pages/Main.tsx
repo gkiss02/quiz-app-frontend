@@ -1,7 +1,7 @@
 import styles from './Main.module.css'
 import CategoryCard from '../Components/CategoryCard/CategoryCard';
 import ResultCard from '../Components/ResultCard/ResultCard';
-import Modal from '../Components/Modal/Modal';
+import Modal from '../Components/StartModal/StartModal';
 import { useState } from 'react';
 
 function Main () {

@@ -34,21 +34,7 @@
     border-radius: 20px;
 }
 
-.button {
-    outline: none;
-    background-color: #3eb8d4;
-    border: none;
-    color: white;
-    width: 10rem;
-    height: 3rem;
-    font-size: 1.5rem;
-    font-weight: bold;
-    border-radius: 5px;
-    margin-top: 2rem;
-    float: right;
-    cursor: pointer;
-}
-
-.button:hover {
-    background-color: #058aa7;
+.text {
+    width: 60%;
+    text-align: center;
 }

@@ -1,7 +1,9 @@
 :root {
   --text-blue: #3EB8D4;
   --grey: #EFEFEF;
-  --question-blue: #DCF8FF
+  --question-blue: #DCF8FF;
+  --green: #00B87C;
+  --red: #FF5341;
 } 
 
 html {

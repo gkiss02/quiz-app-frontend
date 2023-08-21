@@ -3,6 +3,7 @@ import RootLayout from "./Components/RootLayout";
 import Main from "./Pages/Main";
 import Question from "./Pages/Question";
 import Questions from "./Context/Questions";
+import Time from "./Context/Time";
 
 function App() {
   const router = createBrowserRouter([{
@@ -16,7 +17,9 @@ function App() {
 
   return (
     <Questions>
-      <RouterProvider router={router}></RouterProvider>
+      <Time>
+        <RouterProvider router={router}></RouterProvider>
+      </Time>
     </Questions>
   );
 }
