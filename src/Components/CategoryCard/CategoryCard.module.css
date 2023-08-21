@@ -1,0 +1,27 @@
+.container {
+    box-shadow: 0px 2px 5px .5px black;
+    border-radius: 10px;
+    width: fit-content;
+    height: 10rem;
+    padding: 0 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.container:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: transform .5s;
+}
+
+.name {
+    font-weight: bold;
+}
+
+.icon {
+    width: 7rem;
+    height: 7rem;
+    margin: -4rem 0 0;
+}

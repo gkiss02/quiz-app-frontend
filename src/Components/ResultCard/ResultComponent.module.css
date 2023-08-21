@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+}
+
+.icon {
+    width: 3.5rem;
+    height: 3.5rem;
+}
+
+.title {
+    font-size: 1.5rem;
+}
+
+.number {
+    color: var(--text-blue);
+    font-weight: bold;
+    font-size: 2rem;
+}

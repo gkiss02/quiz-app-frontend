@@ -1,0 +1,28 @@
+.container {
+    font-size: 1.5rem;
+    margin: 2rem auto 0;
+    width: 60%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.welcome-text {
+    color: #737373;
+}
+
+.profile-picture {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+}
+
+.category-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5rem 18rem;
+    margin: 5rem auto 2rem;
+    width: fit-content;
+}

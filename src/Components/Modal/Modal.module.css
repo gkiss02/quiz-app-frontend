@@ -1,0 +1,64 @@
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-container {
+    position: absolute;
+    top: 25%;
+    width: 35%;
+    margin: 0 auto;
+    box-shadow: 0px 2px 5px .5px black;
+    background-color: white;
+    border-radius: 5px;
+    padding: 2rem;
+}
+
+.select-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.cancel {
+    background-color: #FF5341;
+}
+
+.start {
+    background-color: #3eb8d4;
+    margin-left: 1rem;
+}
+
+.start, .cancel {
+    outline: none;
+    border: none;
+    color: white;
+    width: 10rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 5px;
+    float: right;
+    cursor: pointer;
+}
+
+.start:hover {
+    background-color: #058aa7;
+}
+
+.cancel:hover {
+    background-color: #c13b2e;
+}
+
+.icon {
+    float: right;
+    cursor: pointer;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}

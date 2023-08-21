@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    gap: 2rem;
+    border: 1px solid var(--grey);
+    border-radius: 20px;
+    color: var(--text-blue);
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.line {
+    background-color: var(--grey);
+    height: 1rem;
+    width: 60rem;
+    border-radius: 20px;
+}
