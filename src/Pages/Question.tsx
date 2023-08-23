@@ -2,12 +2,15 @@ import FilledBar from "../Components/FilledBar/FilledBar";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faX } from '@fortawesome/free-solid-svg-icons'
 import styles from './Question.module.css';
-import buttonStyles from '../Styles/Button.module.css'
 import Timer from "../Components/Timer/Timer";
 import Answer from "../Components/Answer/Answer";
 import { useState, useContext, useEffect } from "react";
 import { QuestionsCTX, TimeCTX } from "../Context/Context";
 import TimeOutModal from "../Components/TimeOutModal/TimeOutModal";
+import { useNavigate } from "react-router-dom";
+import BlueButton from "../Components/UI/BlueButton";
+import QuitModal from "../Components/QuitModal/QuitModal";
+import EmptyModal from "../Components/EmptyModal/EmptyModal";
 
 function Question () {
     const questionsCTX = useContext(QuestionsCTX);
@@ -17,25 +20,43 @@ function Question () {
     const [selected, isSelected] = useState('');
     const timeCTX = useContext(TimeCTX);
     const [counter, setCounter] = useState(timeCTX.time);
-    const [visible, setVisible] = useState(false);
+    const [timeOutModal, setTimeoutModal] = useState(false);
+    const [last, setLast] = useState(false);
+    const navigate = useNavigate();
+    const [quitModal, setQuitModal] = useState(false);
+    const [emptyModal, setEmptyModal] = useState(false);
 
-    function checkHandle () {
+    function checkHandler () {
+        if (selected === '') {
+            setEmptyModal(true);
+            return;
+        }
         setIsChecked(true);
     }
 
-    function nextHandle () {
+    function finishHandler () {
+        navigate('/result');
+    }
+
+    function emptyModalHandler () {
+        setEmptyModal(false);
+    }
+
+    function quitModalHandler () {
+        setQuitModal(!quitModal);
+    }
+
+    function nextHandler () {
         setCounter(timeCTX.time);
         setQuestionCounter(questionCounter + 1);
         setIsChecked(false);
-        setVisible(false);
+        setTimeoutModal(false);
+        setSelected('');
     }
 
     function setSelected (element: string) {
         isSelected(element);
     }
-
-    const answers: string[] = [];
-    answers.push(actualQuestion.correct_answer, ...actualQuestion.incorrect_answers);
 
     useEffect(() => {
         if (!isChecked && counter > 0) {
@@ -45,15 +66,18 @@ function Question () {
             return () => clearTimeout(timeout);
         }
         if (counter == 0 && !isChecked) {
-            setIsChecked(true);
-            setVisible(true)
+            setTimeoutModal(true)
         }
     }, [counter, isChecked]);
 
+    useEffect(() => {
+        if (questionCounter === questionsCTX.questions.length - 1) setLast(true);
+    }, [questionCounter, questionsCTX.questions.length]);
+    
     return (
         <div className={styles.container}>
             <div className={styles['bar-container']}>
-                <FontAwesomeIcon icon={faX} className={styles['x-icon']}/>
+                <FontAwesomeIcon icon={faX} className={styles['x-icon']} onClick={quitModalHandler}/>
                 <FilledBar numberOfQuestions={questionsCTX.questions.length} actual={questionCounter + 1}></FilledBar>
             </div>
             <div className={styles['timer-container']}>
@@ -62,21 +86,27 @@ function Question () {
             <div className={styles['question-container']}>
                 <h2 className={styles.text}>{actualQuestion.question}</h2>
             </div>
-            {answers.map((answer, index) => 
+            {actualQuestion.answers.map((answer, index) => 
                 <Answer
                     key={index} 
                     answer={answer} 
                     setSelected={setSelected} 
                     selected={selected}
-                    correctAnswer={actualQuestion.correct_answer == answer && isChecked}
-                    wrongAnswer={actualQuestion.correct_answer != answer && isChecked}
+                    isCorrectAnswer={actualQuestion.correct_answer == answer && isChecked}
+                    isWrongAnswer={actualQuestion.correct_answer != answer && isChecked}
                     isChecked={isChecked}
+                    correctAnswer={actualQuestion.correct_answer}
                 />
             )}
-            <button className={`${buttonStyles.button} ${buttonStyles['blue-button']}`} onClick={isChecked ? nextHandle : checkHandle}>
+            {last && <BlueButton onClick={isChecked ?  finishHandler : checkHandler}>
+                {isChecked ? 'Finish' : 'Check'}
+            </BlueButton>}
+            {!last && <BlueButton onClick={isChecked ? nextHandler : checkHandler}>
                 {isChecked ? 'Next' : 'Check'}
-            </button>
-            {visible && <TimeOutModal nextHandle={nextHandle}></TimeOutModal>}
+            </BlueButton>}
+            {timeOutModal && <TimeOutModal nextHandle={last ? finishHandler : nextHandler}></TimeOutModal>}
+            {quitModal && <QuitModal closeModal={quitModalHandler}></QuitModal>}
+            {emptyModal && <EmptyModal closeModal={emptyModalHandler}></EmptyModal>}
         </div>
     )
 }

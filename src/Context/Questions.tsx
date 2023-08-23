@@ -2,7 +2,7 @@ import { useState } from "react";
 import { QuestionsCTX } from "./Context";
 
 const Questions: React.FC<({children: React.ReactNode})> = (props) => {
-    const [questions, setQuestions] = useState([{category: "", correct_answer: "", difficulty: "", incorrect_answers: [""], question: "", type: ""}]);
+    const [questions, setQuestions] = useState([{category: "", correct_answer: "", difficulty: "", incorrect_answers: [""], question: "", type: "", answers: [""]}]);
     const [loading, setLoading] = useState(false);
     const [ready, setReady] = useState(false);
 
@@ -15,11 +15,17 @@ const Questions: React.FC<({children: React.ReactNode})> = (props) => {
         setReady(true);
     }
 
+    for (let i = 0; i < questions.length; i++) {
+        questions[i].answers = [questions[i].correct_answer, ...questions[i].incorrect_answers];
+        questions[i].answers.sort(() => Math.random() - 0.5);
+    }
+
     const obj = {
         questions: questions,
         getQuestions: getQuestions,
         loading: loading,
-        ready: ready
+        ready: ready,
+        setReady: setReady,
     }
 
     return (

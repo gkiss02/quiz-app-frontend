@@ -9,7 +9,7 @@ const Select: React.FC<({name: string, arr: string[], setter: (element: string) 
         <div className={styles.container}>
             <label>{props.name}</label>
             <select className={styles.select} onChange={changeHandler}>
-                {props.arr.map(item => <option value={item.toLowerCase()}>{item}</option>)}
+                {props.arr.map((item, index) => <option key={index} value={item.toLowerCase()}>{item}</option>)}
             </select>
         </div>
     )

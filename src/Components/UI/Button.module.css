@@ -10,11 +10,11 @@
     margin-top: 2rem;
     float: right;
     cursor: pointer;
+    margin-left: 1rem;
 }
 
 .blue-button {
     background-color: #3eb8d4;
-    margin-left: 1rem;
 }
 
 .blue-button:hover {

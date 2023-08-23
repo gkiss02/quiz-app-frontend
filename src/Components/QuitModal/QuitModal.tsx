@@ -1,0 +1,30 @@
+import styles from './QuitModal.module.css';
+import Modal from "../UI/Modal";
+import BlueButton from "../UI/BlueButton";
+import RedButton from "../UI/RedButton";
+import { useNavigate } from "react-router-dom";
+import { useContext } from 'react';
+import { TimeCTX, ScoreCTX } from '../../Context/Context';
+
+const QuitModal:React.FC <({closeModal: () => void})> = (props) => {
+    const navigate = useNavigate();
+    const timeCTX = useContext(TimeCTX);
+    const scoreCTX = useContext(ScoreCTX);
+
+    function backHandler () {
+        navigate('/');
+        timeCTX.setTime(30);
+        scoreCTX.setScore(0);
+    }
+
+    return (
+        <Modal closeModal={props.closeModal}>
+            <h2 className={styles.header}>Are you sure you want to quit?</h2>
+            <p className={styles.text}>All of your scores that you earned this round will be lost!</p>
+            <RedButton onClick={backHandler}>Yes</RedButton>
+            <BlueButton onClick={props.closeModal}>No</BlueButton>
+        </Modal>
+    )
+}
+
+export default QuitModal;

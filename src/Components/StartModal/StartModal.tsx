@@ -1,15 +1,13 @@
-import styles from './StartModal.module.css'
-import modalStyles from '../../Styles/Modal.module.css'
-import buttonStyles from '../../Styles/Button.module.css'
-import { createPortal } from 'react-dom'
+import Modal from '../UI/Modal'
 import Select from '../Select/Select'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faX } from '@fortawesome/free-solid-svg-icons'
 import { useState, useContext } from 'react'
 import { QuestionsCTX, TimeCTX } from '../../Context/Context'
 import { useNavigate } from 'react-router-dom'
+import BlueButton from '../UI/BlueButton'
+import RedButton from '../UI/RedButton'
+import { log } from 'console'
 
-const Modal: React.FC <({closeModal: () => void, id: string})> = (props) => {
+const StartModal: React.FC <({closeModal: () => void, id: string})> = (props) => {
     const [difficulty, setDifficulty] = useState('easy');
     const [numberOfQuestions, setNumberOfQuestions] = useState('10');
     const timeCTX = useContext(TimeCTX);
@@ -34,41 +32,34 @@ const Modal: React.FC <({closeModal: () => void, id: string})> = (props) => {
 
     if (questionsCTX.ready) {
         navigate('/question');
+        questionsCTX.setReady(false);
     }
 
     return (
-        createPortal(
-            <div className={modalStyles.container} onClick={props.closeModal}>
-                <div className={modalStyles['modal-container']} onClick={event => event.stopPropagation()}>
-                    <FontAwesomeIcon icon={faX} className={modalStyles.icon} onClick={props.closeModal}/>
-                    <Select 
-                        key={'difficulty'} 
-                        name='Difficulty' 
-                        arr={['Easy', 'Medium', 'Hard']} 
-                        setter={difficultyHandler}
-                    />
-                    <Select 
-                        key={'numberOfQuestions'} 
-                        name='Number of questions' 
-                        arr={['10', '25', '50']} 
-                        setter={numberOfQuestionsHandler}
-                    />
-                    <Select 
-                        key={'time'} 
-                        name='Time' 
-                        arr={['30', '60', '120']} 
-                        setter={timeHandler}
-                    />
-                    <button className={`${buttonStyles.button} ${buttonStyles['blue-button']}`} onClick={startHandler}>
-                        {questionsCTX.loading ? 'Starting...' : 'Start'}
-                    </button>
-                    <button className={`${buttonStyles.button} ${buttonStyles['red-button']}`} onClick={props.closeModal}>
-                        Cancel
-                    </button>
-                </div>
-            </div>,
-            document.body)
+        <Modal closeModal={props.closeModal}>
+            <Select 
+                name='Difficulty' 
+                arr={['Easy', 'Medium', 'Hard']} 
+                setter={difficultyHandler}
+            />
+            <Select 
+                name='Number of questions' 
+                arr={['10', '25', '50']} 
+                setter={numberOfQuestionsHandler}
+            />
+            <Select 
+                name='Time' 
+                arr={['30', '60', '120']} 
+                setter={timeHandler}
+            />
+            <BlueButton onClick={startHandler}>
+                {questionsCTX.loading ? 'Starting...' : 'Start'}
+            </BlueButton>
+            <RedButton onClick={props.closeModal}>
+                Cancel
+            </RedButton>
+        </Modal>
     )
 }
 
-export default Modal
+export default StartModal;

@@ -2,7 +2,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
 }
 
 .circle-container {
@@ -37,4 +36,5 @@
 
 .text {
     font-size: 2rem;
+    color: var(--text-grey)
 }

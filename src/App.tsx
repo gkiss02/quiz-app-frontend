@@ -4,6 +4,8 @@ import Main from "./Pages/Main";
 import Question from "./Pages/Question";
 import Questions from "./Context/Questions";
 import Time from "./Context/Time";
+import Result from "./Pages/Result";
+import Score from "./Context/Score";
 
 function App() {
   const router = createBrowserRouter([{
@@ -11,14 +13,17 @@ function App() {
     element: <RootLayout></RootLayout> ,
     children: [
       { path: "/", element: <Main></Main> },
-      { path: "/question", element: <Question></Question> }
+      { path: "/question", element: <Question></Question> },
+      { path: "/result", element: <Result></Result> }
     ]
   }])
 
   return (
     <Questions>
       <Time>
-        <RouterProvider router={router}></RouterProvider>
+        <Score>
+          <RouterProvider router={router}></RouterProvider>
+        </Score>
       </Time>
     </Questions>
   );
