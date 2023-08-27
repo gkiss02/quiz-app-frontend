@@ -1,6 +1,6 @@
 import styles from './Result.module.css'
 import { useNavigate } from 'react-router-dom';
-import BlueButton from '../Components/UI/BlueButton';
+import BlueButton from '../UI/BlueButton';
 import { useContext } from 'react';
 import { TimeCTX, QuestionsCTX, ScoreCTX } from '../Context/Context';
 

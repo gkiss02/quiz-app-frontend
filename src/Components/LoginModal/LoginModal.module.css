@@ -1,0 +1,25 @@
+.form {
+    margin-top: 2rem;
+    padding-left: 2rem;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5rem;
+    gap: 1rem;
+}
+
+.form-item {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+}
+
+.input {
+    width: 30rem;
+    outline: none;
+    padding: .5rem;
+    border-radius: 5px;
+    border: 1px solid black;
+}

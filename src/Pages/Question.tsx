@@ -8,7 +8,7 @@ import { useState, useContext, useEffect } from "react";
 import { QuestionsCTX, TimeCTX } from "../Context/Context";
 import TimeOutModal from "../Components/TimeOutModal/TimeOutModal";
 import { useNavigate } from "react-router-dom";
-import BlueButton from "../Components/UI/BlueButton";
+import BlueButton from "../UI/BlueButton";
 import QuitModal from "../Components/QuitModal/QuitModal";
 import EmptyModal from "../Components/EmptyModal/EmptyModal";
 

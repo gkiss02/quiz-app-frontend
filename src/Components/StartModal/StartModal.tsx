@@ -1,11 +1,11 @@
-import Modal from '../UI/Modal'
+import Modal from '../../UI/Modal'
 import Select from '../Select/Select'
 import { useState, useContext } from 'react'
 import { QuestionsCTX, TimeCTX } from '../../Context/Context'
 import { useNavigate } from 'react-router-dom'
-import BlueButton from '../UI/BlueButton'
-import RedButton from '../UI/RedButton'
-import { log } from 'console'
+import BlueButton from '../../UI/BlueButton'
+import RedButton from '../../UI/RedButton'
+import styles from './StartModal.module.css'
 
 const StartModal: React.FC <({closeModal: () => void, id: string})> = (props) => {
     const [difficulty, setDifficulty] = useState('easy');
@@ -52,6 +52,12 @@ const StartModal: React.FC <({closeModal: () => void, id: string})> = (props) =>
                 arr={['30', '60', '120']} 
                 setter={timeHandler}
             />
+            {questionsCTX.notEnough && 
+                <div className={styles['not-enough']}>
+                    <p>Unfortunately there are no enough questions in our database yet!</p>
+                    <p>Please change the difficulty or the category</p>
+                </div>
+            }
             <BlueButton onClick={startHandler}>
                 {questionsCTX.loading ? 'Starting...' : 'Start'}
             </BlueButton>

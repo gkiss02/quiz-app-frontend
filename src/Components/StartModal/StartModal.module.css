@@ -1,0 +1,6 @@
+.not-enough {
+    margin-top: 1rem;
+    color: var(--red);
+    font-size: 1.25rem;
+    text-align: center;
+}

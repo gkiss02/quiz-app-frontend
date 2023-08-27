@@ -1,5 +1,5 @@
-import BlueButton from "../UI/BlueButton";
-import Modal from "../UI/Modal";
+import BlueButton from "../../UI/BlueButton";
+import Modal from "../../UI/Modal";
 import styles from "./EmptyModal.module.css";
 
 const EmptyModal: React.FC<({closeModal: () => void})> = (props) => {

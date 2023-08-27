@@ -2,11 +2,13 @@ import styles from './Main.module.css'
 import CategoryCard from '../Components/CategoryCard/CategoryCard';
 import ResultCard from '../Components/ResultCard/ResultCard';
 import Modal from '../Components/StartModal/StartModal';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { QuestionsCTX } from '../Context/Context';
 
 function Main () {
     const [visible, setVisible] = useState(false);
     const [id, setId] = useState('0');
+    const setNotEnough = useContext(QuestionsCTX).setNotEnough;
 
     const profilePicture = require('../Images/man.png');
     const musicIcon = require('../Images/001-musical-notes.png');
@@ -28,6 +30,7 @@ function Main () {
 
     function closeModal () {    
         setVisible(false);
+        setNotEnough(false);
     }
 
     return (

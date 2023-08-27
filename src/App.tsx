@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import LandingPage from "./Pages/LandingPage";
 import RootLayout from "./Components/RootLayout";
 import Main from "./Pages/Main";
 import Question from "./Pages/Question";
@@ -12,7 +13,8 @@ function App() {
     path: "/",
     element: <RootLayout></RootLayout> ,
     children: [
-      { path: "/", element: <Main></Main> },
+      { path: "/", element: <LandingPage></LandingPage>},
+      { path: "/main", element: <Main></Main> },
       { path: "/question", element: <Question></Question> },
       { path: "/result", element: <Result></Result> }
     ]

@@ -6,6 +6,8 @@ export const QuestionsCTX = createContext({
     loading: false,
     ready: false,
     setReady: (ready: boolean) => {},
+    notEnough: false,
+    setNotEnough: (notEnough: boolean) => {},
 });
 
 export const TimeCTX = createContext({
