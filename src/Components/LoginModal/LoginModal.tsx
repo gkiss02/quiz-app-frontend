@@ -1,4 +1,5 @@
 import BlueButton from "../../UI/BlueButton";
+import ButtonContainer from "../../UI/ButtonContainer";
 import Modal from "../../UI/Modal";
 import styles from './LoginModal.module.css';
 
@@ -20,9 +21,13 @@ const LoginModal: React.FC<({closeModal: () => void})> = (props) => {
                         <input type="password" className={styles.input}></input>
                     </div>
                 </div>
-                <div>
-                    <BlueButton onClick={signIn}>Sign in</BlueButton>
+                <div className={styles['remember-me']}>
+                    <input type="checkbox"></input>
+                    <p>Remember me</p>
                 </div>
+                <ButtonContainer>
+                    <BlueButton onClick={signIn}>Sign in</BlueButton>
+                </ButtonContainer>
             </div>
         </Modal>
     );

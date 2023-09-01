@@ -1,0 +1,55 @@
+.container {
+    width: 70%;
+    margin: 2rem auto;
+    font-size: 1.5rem;
+}
+
+.arrow {
+    font-size: 3rem;
+    cursor: pointer;
+}
+
+.element-container {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    width: 60%;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.element-container::after{
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: black;
+    margin-top: 1rem;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-top: 1rem;
+}
+
+.input {
+    width: 40rem;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: .5rem;
+    margin-bottom: 1rem;
+}
+
+.single-item {
+    display: flex;
+    gap: 40rem;
+}
+
+.icon {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+}

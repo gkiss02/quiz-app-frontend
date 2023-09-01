@@ -9,6 +9,12 @@
     padding: .5rem 0;
 }
 
+.container:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: transform .5s;
+}
+
 .line {
     width: .1rem;
     height: 3.5rem;

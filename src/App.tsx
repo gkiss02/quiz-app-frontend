@@ -7,6 +7,7 @@ import Questions from "./Context/Questions";
 import Time from "./Context/Time";
 import Result from "./Pages/Result";
 import Score from "./Context/Score";
+import Settings from "./Pages/Settings";
 
 function App() {
   const router = createBrowserRouter([{
@@ -16,7 +17,8 @@ function App() {
       { path: "/", element: <LandingPage></LandingPage>},
       { path: "/main", element: <Main></Main> },
       { path: "/question", element: <Question></Question> },
-      { path: "/result", element: <Result></Result> }
+      { path: "/result", element: <Result></Result> },
+      { path: "/settings", element: <Settings></Settings> },
     ]
   }])
 

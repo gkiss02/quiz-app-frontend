@@ -2,11 +2,13 @@ import styles from './Main.module.css'
 import CategoryCard from '../Components/CategoryCard/CategoryCard';
 import ResultCard from '../Components/ResultCard/ResultCard';
 import Modal from '../Components/StartModal/StartModal';
+import ProfileMenu from '../Components/ProfileMenu/ProfileMenu'
 import { useState, useContext } from 'react';
 import { QuestionsCTX } from '../Context/Context';
 
 function Main () {
     const [visible, setVisible] = useState(false);
+    const [profileMenu, setProfileMenu] = useState(false);
     const [id, setId] = useState('0');
     const setNotEnough = useContext(QuestionsCTX).setNotEnough;
 
@@ -33,6 +35,10 @@ function Main () {
         setNotEnough(false);
     }
 
+    function profileMenuHandler () {
+        setProfileMenu(!profileMenu)
+    }
+
     return (
         <div className={styles.container}>
             <header className={styles.header}>
@@ -40,7 +46,10 @@ function Main () {
                     <h2>Hi, John</h2>
                     <p className={styles['welcome-text']}>Let's make this day productive</p>
                 </div>
-                <img src={profilePicture} className={styles['profile-picture']}></img>
+                <div className={styles['profile-container']}>
+                    <img src={profilePicture} className={styles['profile-picture']} onClick={profileMenuHandler}></img>
+                    {profileMenu && <ProfileMenu></ProfileMenu>}
+                </div>
             </header>
             <ResultCard></ResultCard>
             <div>

@@ -5,6 +5,7 @@ import { QuestionsCTX, TimeCTX } from '../../Context/Context'
 import { useNavigate } from 'react-router-dom'
 import BlueButton from '../../UI/BlueButton'
 import RedButton from '../../UI/RedButton'
+import ButtonContainer from '../../UI/ButtonContainer';
 import styles from './StartModal.module.css'
 
 const StartModal: React.FC <({closeModal: () => void, id: string})> = (props) => {
@@ -58,12 +59,14 @@ const StartModal: React.FC <({closeModal: () => void, id: string})> = (props) =>
                     <p>Please change the difficulty or the category</p>
                 </div>
             }
-            <BlueButton onClick={startHandler}>
-                {questionsCTX.loading ? 'Starting...' : 'Start'}
-            </BlueButton>
-            <RedButton onClick={props.closeModal}>
-                Cancel
-            </RedButton>
+            <ButtonContainer>
+                <BlueButton onClick={startHandler}>
+                    {questionsCTX.loading ? 'Starting...' : 'Start'}
+                </BlueButton>
+                <RedButton onClick={props.closeModal}>
+                    Cancel
+                </RedButton>
+            </ButtonContainer>
         </Modal>
     )
 }

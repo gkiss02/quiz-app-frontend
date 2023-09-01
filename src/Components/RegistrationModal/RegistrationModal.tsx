@@ -1,6 +1,7 @@
 import styles from './RegistrationModal.module.css';
 import Modal from '../../UI/Modal';
 import BlueButton from '../../UI/BlueButton';
+import ButtonContainer from '../../UI/ButtonContainer';
 
 const RegistrationModal: React.FC<{closeModal: () => void}> = (props) => {
     function reg() {
@@ -27,9 +28,9 @@ const RegistrationModal: React.FC<{closeModal: () => void}> = (props) => {
                     <input type="password" className={styles.input}/>
                 </div>
             </div>
-            <div>
+            <ButtonContainer>
                 <BlueButton onClick={reg}>Register</BlueButton>
-            </div>
+            </ButtonContainer>
         </Modal>
     )
 }

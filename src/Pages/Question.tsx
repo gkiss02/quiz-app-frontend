@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import BlueButton from "../UI/BlueButton";
 import QuitModal from "../Components/QuitModal/QuitModal";
 import EmptyModal from "../Components/EmptyModal/EmptyModal";
+import ButtonContainer from "../UI/ButtonContainer";
 
 function Question () {
     const questionsCTX = useContext(QuestionsCTX);
@@ -98,12 +99,14 @@ function Question () {
                     correctAnswer={actualQuestion.correct_answer}
                 />
             )}
-            {last && <BlueButton onClick={isChecked ?  finishHandler : checkHandler}>
-                {isChecked ? 'Finish' : 'Check'}
-            </BlueButton>}
-            {!last && <BlueButton onClick={isChecked ? nextHandler : checkHandler}>
-                {isChecked ? 'Next' : 'Check'}
-            </BlueButton>}
+            <ButtonContainer>
+                {last && <BlueButton onClick={isChecked ?  finishHandler : checkHandler}>
+                    {isChecked ? 'Finish' : 'Check'}
+                </BlueButton>}
+                {!last && <BlueButton onClick={isChecked ? nextHandler : checkHandler}>
+                    {isChecked ? 'Next' : 'Check'}
+                </BlueButton>}
+            </ButtonContainer>
             {timeOutModal && <TimeOutModal nextHandle={last ? finishHandler : nextHandler}></TimeOutModal>}
             {quitModal && <QuitModal closeModal={quitModalHandler}></QuitModal>}
             {emptyModal && <EmptyModal closeModal={emptyModalHandler}></EmptyModal>}
