@@ -1,0 +1,54 @@
+.helper-container {
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+    padding-top: 2rem;
+}
+
+.header-container {
+    display: flex;
+    margin-bottom: 2rem;
+}
+
+.icon-container {
+    flex-basis: 33%;
+}
+
+.title {
+    flex-basis: 33%;
+}
+
+.icon {
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    align-self: flex-start;
+}
+
+.wrapper {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.winners-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 6rem;
+}
+
+.crown {
+    margin-top: 2rem;
+    width: 7rem;
+    height: 7rem;
+}
+.top-3 {
+    background: linear-gradient(to bottom, #3EB8D4, #438da6);
+}
+
+.top-10 {
+    width: 70%;
+    margin: 0 auto;
+}

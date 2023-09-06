@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    justify-content: center;
+    font-size: 1.5rem;
+    gap: 1rem;
+    background-color: white;
+    border-radius: 16px;
+    padding: .25rem;
+    margin: 0 auto;
+}
+
+.element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    flex-basis: 33%;
+    height: 4rem;
+    border-radius: 16px;
+    color: var(--text-grey);
+}
+
+.active {
+    background-color: var(--text-blue);
+    color: white
+}
