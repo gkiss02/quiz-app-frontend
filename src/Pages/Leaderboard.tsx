@@ -2,11 +2,17 @@ import styles from './Leaderboard.module.css'
 import LeaderboardSelector from '../Components/LeaderboardSelector/LeaderboardSelector';
 import Winners from '../Components/Winners/Winners';
 import Rank from '../Components/Rank/Rank';
+import { useNavigate } from 'react-router-dom';
 
 function Leaderboard () {
     const backIcon = require('../Images/back-white.png')
     const avatarIcon = require('../Images/man.png')
     const crownIcon = require('../Images/crown.png')
+    const navigate = useNavigate();
+
+    function toHome () {
+        navigate('/main')
+    }
 
     class User {
         name: string;
@@ -35,7 +41,7 @@ function Leaderboard () {
                 <div className={styles['helper-container']}>
                     <div className={styles['header-container']}>
                         <div className={styles['icon-container']}>
-                            <img src={backIcon} className={styles.icon}></img>
+                            <img src={backIcon} className={styles.icon} onClick={toHome}></img>
                         </div>
                         <h1 className={styles.title}>Leaderboard</h1>
                     </div>

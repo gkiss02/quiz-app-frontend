@@ -9,6 +9,8 @@ import Result from "./Pages/Result";
 import Score from "./Context/Score";
 import Settings from "./Pages/Settings";
 import Leaderboard from "./Pages/Leaderboard";
+import ErrorPage from "./Pages/ErrorPage";
+
 
 function App() {
   const router = createBrowserRouter([{
@@ -20,7 +22,8 @@ function App() {
       { path: "/question", element: <Question></Question> },
       { path: "/result", element: <Result></Result> },
       { path: "/settings", element: <Settings></Settings> },
-      { path: "/leaderboard", element: <Leaderboard></Leaderboard>},
+      { path: "/leaderboard", element: <Leaderboard></Leaderboard> },
+      { path: "*", element: <ErrorPage></ErrorPage> }
     ]
   }])
 

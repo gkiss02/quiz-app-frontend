@@ -11,7 +11,7 @@ function Result () {
     const scoreCTX = useContext(ScoreCTX);
 
     function backHandler () {
-        navigate('/');
+        navigate('/main');
         timeCTX.setTime(30);
         scoreCTX.setScore(0);
     }
