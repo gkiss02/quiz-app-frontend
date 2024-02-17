@@ -3,13 +3,15 @@ import CategoryCard from '../Components/CategoryCard/CategoryCard';
 import ResultCard from '../Components/ResultCard/ResultCard';
 import Modal from '../Components/StartModal/StartModal';
 import ProfileMenu from '../Components/ProfileMenu/ProfileMenu'
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { QuestionsCTX } from '../Context/Context';
+import { getAuthToken } from '../util/auth';
 
 function Main () {
     const [visible, setVisible] = useState(false);
     const [profileMenu, setProfileMenu] = useState(false);
     const [id, setId] = useState('0');
+    const [username, setUsername] = useState('');
     const setNotEnough = useContext(QuestionsCTX).setNotEnough;
 
     const profilePicture = require('../Images/man.png');
@@ -39,11 +41,26 @@ function Main () {
         setProfileMenu(!profileMenu)
     }
 
+    useEffect(() => {
+        async function fetchMyData () {
+            const response = await fetch('http://localhost:8080/users/me', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + getAuthToken()
+                }
+            })
+
+            const data = await response.json();
+            setUsername(data.username);
+        }
+        fetchMyData();
+    }, []);
+
     return (
         <div className={styles.container}>
             <header className={styles.header}>
                 <div>
-                    <h2>Hi, John</h2>
+                    <h2>Hi, {username}</h2>
                     <p className={styles['welcome-text']}>Let's make this day productive</p>
                 </div>
                 <div className={styles['profile-container']}>

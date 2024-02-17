@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import LandingPage from "./Pages/LandingPage";
+import Login from "./Pages/Login";
 import RootLayout from "./Components/RootLayout";
 import Main from "./Pages/Main";
 import Question from "./Pages/Question";
@@ -10,6 +10,7 @@ import Score from "./Context/Score";
 import Settings from "./Pages/Settings";
 import Leaderboard from "./Pages/Leaderboard";
 import ErrorPage from "./Pages/ErrorPage";
+import Register from "./Pages/Register";
 
 
 function App() {
@@ -17,7 +18,8 @@ function App() {
     path: "/",
     element: <RootLayout></RootLayout> ,
     children: [
-      { path: "/", element: <LandingPage></LandingPage>},
+      { path: "/", element: <Login></Login>},
+      { path: "/register", element: <Register></Register>},
       { path: "/main", element: <Main></Main> },
       { path: "/question", element: <Question></Question> },
       { path: "/result", element: <Result></Result> },

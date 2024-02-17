@@ -30,3 +30,14 @@ a {
   color: inherit;
   margin: 0;
 }
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+input {
+  border: none;
+  outline: none;
+}
