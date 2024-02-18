@@ -4,6 +4,7 @@ import { faX } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useContext } from 'react';
 import { ScoreCTX } from '../../Context/Context';
+import { getAuthToken } from '../../util/auth';
 
 type AnswerProps = {
     answer: string,
@@ -18,9 +19,18 @@ type AnswerProps = {
 const Answer: React.FC <AnswerProps> = (props) => {
     const scoreCTX = useContext(ScoreCTX);
 
+    async function increaseScore () {
+        const response = await fetch('http://localhost:8080/game/increaseScore', {
+            method: 'PATCH',
+            headers: {
+                'Authorization': 'Bearer ' + getAuthToken(),
+            }
+        });
+    }
+
     useEffect(() => {
         if (props.correctAnswer == props.selected) {
-            scoreCTX.setScore(scoreCTX.score + 1);
+            increaseScore();
         }
     }, [props.isCorrectAnswer])
 

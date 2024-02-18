@@ -12,7 +12,7 @@
 }
 
 .text-container {
-    margin-top: 5rem;
+    margin: 5rem auto 2rem;
     text-align: center;
     color: var(--text-grey);
 }

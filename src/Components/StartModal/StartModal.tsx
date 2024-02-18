@@ -7,9 +7,12 @@ import BlueButton from '../../UI/BlueButton'
 import RedButton from '../../UI/RedButton'
 import ButtonContainer from '../../UI/ButtonContainer';
 import styles from './StartModal.module.css'
+import { get } from 'http'
+import { getAuthToken } from '../../util/auth'
 
 const StartModal: React.FC <({closeModal: () => void, id: string})> = (props) => {
     const [difficulty, setDifficulty] = useState('easy');
+    const [difficultyNumber, setDifficultyNumber] = useState(1);
     const [numberOfQuestions, setNumberOfQuestions] = useState('10');
     const timeCTX = useContext(TimeCTX);
     const questionsCTX = useContext(QuestionsCTX);
@@ -17,6 +20,13 @@ const StartModal: React.FC <({closeModal: () => void, id: string})> = (props) =>
 
     function difficultyHandler (element: string) {
         setDifficulty(element);
+        if (element === 'easy') {
+            setDifficultyNumber(1);
+        } else if (element === 'medium') {
+            setDifficultyNumber(2);
+        } else {
+            setDifficultyNumber(3);
+        }
     }
 
     function numberOfQuestionsHandler (element: string) {
@@ -29,6 +39,17 @@ const StartModal: React.FC <({closeModal: () => void, id: string})> = (props) =>
 
     function startHandler () {
         questionsCTX.getQuestions(difficulty, numberOfQuestions, props.id);
+        createGame()
+    }
+
+    async function createGame () {
+        const response = await fetch(`http://localhost:8080/game/createGame/${difficultyNumber}`, {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + getAuthToken(),
+                'Content-Type': 'application/json',
+            },
+        });
     }
 
     if (questionsCTX.ready) {
