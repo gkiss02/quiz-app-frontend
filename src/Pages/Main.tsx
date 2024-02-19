@@ -6,21 +6,7 @@ import ProfileMenu from '../Components/ProfileMenu/ProfileMenu'
 import { useState, useContext, useEffect } from 'react';
 import { QuestionsCTX } from '../Context/Context';
 import { getAuthToken } from '../util/auth';
-
-class User {
-    id: number;
-    username: string;
-    email: string;
-    password: string;
-    profilePicture: string;
-    constructor(id: number, username: string, email: string, password: string, profilePicture: string) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.profilePicture = profilePicture;
-    }
-}
+import User from '../util/User';
 
 function Main () {
     const [visible, setVisible] = useState(false);
