@@ -7,14 +7,28 @@ import { useState, useContext, useEffect } from 'react';
 import { QuestionsCTX } from '../Context/Context';
 import { getAuthToken } from '../util/auth';
 
+class User {
+    id: number;
+    username: string;
+    email: string;
+    password: string;
+    profilePicture: string;
+    constructor(id: number, username: string, email: string, password: string, profilePicture: string) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.profilePicture = profilePicture;
+    }
+}
+
 function Main () {
     const [visible, setVisible] = useState(false);
     const [profileMenu, setProfileMenu] = useState(false);
     const [id, setId] = useState('0');
-    const [username, setUsername] = useState('');
+    const [user, setUser] = useState(new User(0, '', '', '', ''));
     const setNotEnough = useContext(QuestionsCTX).setNotEnough;
 
-    const profilePicture = require('../Images/man.png');
     const musicIcon = require('../Images/001-musical-notes.png');
     const animalsIcon = require('../Images/002-giraffe.png');
     const mathIcon = require('../Images/003-calculator.png');
@@ -51,7 +65,7 @@ function Main () {
             })
 
             const data = await response.json();
-            setUsername(data.username);
+            setUser(data);
         }
         fetchMyData();
     }, []);
@@ -60,11 +74,11 @@ function Main () {
         <div className={styles.container}>
             <header className={styles.header}>
                 <div>
-                    <h2>Hi, {username}</h2>
+                    <h2>Hi, {user.username}</h2>
                     <p className={styles['welcome-text']}>Let's make this day productive</p>
                 </div>
                 <div className={styles['profile-container']}>
-                    <img src={profilePicture} className={styles['profile-picture']} onClick={profileMenuHandler}></img>
+                    <img src={user.profilePicture} className={styles['profile-picture']} onClick={profileMenuHandler}></img>
                     {profileMenu && <ProfileMenu></ProfileMenu>}
                 </div>
             </header>
