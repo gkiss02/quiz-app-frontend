@@ -1,10 +1,12 @@
 import styles from './Login.module.css';
 import { useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 function Login () {
     let emailRef = useRef<HTMLInputElement>(null);
     let passwordRef = useRef<HTMLInputElement>(null);
+    const [invalidUser, setInvalidUser] = useState(false);
 
     const navigate = useNavigate();
 
@@ -25,6 +27,10 @@ function Login () {
         if (response.ok) {
             navigate('/main');
         }
+
+        if (response.status === 401) {
+            setInvalidUser(true);
+        }
     }
 
     return (
@@ -34,8 +40,9 @@ function Login () {
                 <p>Please login below</p>
             </div>
             <div className={styles['input-container']}>
-                <input type='text' className={styles.input} placeholder='Email' ref={emailRef}></input>
-                <input type='password' className={styles.input} placeholder='Password' ref={passwordRef}></input>
+                <input type='text' className={`${styles.input} ${invalidUser && styles['error-border']}`} placeholder='Email' ref={emailRef}/>
+                <input type='password' className={`${styles.input} ${invalidUser && styles['error-border']}`} placeholder='Password' ref={passwordRef}/>
+                {invalidUser && <p className={styles['error-text']}>Invalid email or password</p>}
             </div>
             <button className={styles.button} onClick={handleLogin}>Login</button>
             <div>
