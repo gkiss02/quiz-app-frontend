@@ -7,7 +7,6 @@ import BlueButton from '../../UI/BlueButton'
 import RedButton from '../../UI/RedButton'
 import ButtonContainer from '../../UI/ButtonContainer';
 import styles from './StartModal.module.css'
-import { get } from 'http'
 import { getAuthToken } from '../../util/auth'
 
 const StartModal: React.FC <({closeModal: () => void, id: string})> = (props) => {

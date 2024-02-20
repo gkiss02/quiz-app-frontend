@@ -9,13 +9,17 @@
     cursor: pointer;
 }
 
-.element-container {
+.element-container, .delete-button_container {
     display: flex;
     flex-direction: column;
     gap: .5rem;
     width: 60%;
     margin: 0 auto;
     padding: 1rem;
+}
+
+.delete-button_container {
+    align-items: center;
 }
 
 .element-container::after{
@@ -89,4 +93,17 @@
 
 .image-wrapper:hover {
     filter: brightness(0.75);
+}
+
+.delete-button {
+    width: 40rem;
+    height: 3rem;
+    background-color: var(--red);
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.delete-button:hover {
+    background-color: #c13b2e;
 }

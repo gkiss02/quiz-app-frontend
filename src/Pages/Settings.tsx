@@ -8,6 +8,7 @@ import { getAuthToken } from "../util/auth";
 import User from "../util/User";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import DeleteModal from "../Components/DeleteModal/DeleteModal";
 
 function Settings() {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ function Settings() {
   const passwordConfirmRef = useRef<HTMLInputElement>(null);
   const [user, setUser] = useState(new User(0, "", "", "", ""));
   const [profilePicture, setProfilePicture] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   const arr: string[] = [];
   
@@ -23,6 +25,14 @@ function Settings() {
 
   function toHome() {
     navigate("/main");
+  }
+
+  function showModalHandler() {
+    setShowModal(true);
+  }
+
+  function closeModal() {
+    setShowModal(false);
   }
 
   function profilePictureClick(event: any) {
@@ -151,6 +161,10 @@ function Settings() {
           <Switch></Switch>
         </div>
       </div>
+      <div className={styles['delete-button_container']}>
+        <button className={styles['delete-button']} onClick={showModalHandler}>Delete Profile</button>
+      </div>
+      {showModal && <DeleteModal closeModal={closeModal}></DeleteModal>}
     </div>
   );
 }
