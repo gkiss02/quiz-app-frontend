@@ -15,8 +15,8 @@ function ResultCard () {
     }
 
     useEffect(() => {
-        async function fetchMyRanking () {
-            const response = await fetch('http://localhost:8080/ranking/myRanking', {
+        (async function () {
+            const response = await fetch('http://localhost:8080/rankings/myRanking', {
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + getAuthToken()
@@ -25,15 +25,14 @@ function ResultCard () {
 
             const data = await response.json();
             setMyRanking(data);
-        } 
-        fetchMyRanking();
+        }())
     }, [])
 
     return (
         <div className={styles.container} onClick={clickHandle}>
-            <ResultComponent src={trophyIcon} title="Ranking" number={myRanking.stead}></ResultComponent>
+            <ResultComponent src={trophyIcon} title="Ranking" number={myRanking.rank}></ResultComponent>
             <div className={styles.line}></div>
-            <ResultComponent src={coinIcon} title="Points" number={myRanking.totalScore}></ResultComponent>
+            <ResultComponent src={coinIcon} title="Points" number={myRanking.score}></ResultComponent>
         </div>
     )
 }

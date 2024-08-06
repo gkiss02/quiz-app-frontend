@@ -8,13 +8,13 @@ import { getAuthToken } from '../util/auth';
 
 class User {
     id: number;
-    username: string;
-    totalScore: string;
+    name: string;
+    score: string;
     img: string;
-    constructor(id: number, username: string, totalScore: string, img: string) {
+    constructor(id: number, name: string, score: string, img: string) {
         this.id = id;
-        this.username = username;
-        this.totalScore = totalScore;
+        this.name = name;
+        this.score = score;
         this.img = img;
     }
 }
@@ -33,8 +33,8 @@ function Leaderboard () {
     }
 
     useEffect(() => {
-        async function getRankings () {
-            const response = await fetch(`http://localhost:8080/ranking/${selected}`, {
+        (async function () {
+            const response = await fetch(`http://localhost:8080/rankings/${selected}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + getAuthToken()
@@ -42,14 +42,12 @@ function Leaderboard () {
             })
             const data = await response.json();
             let usersArr = [];
-            for (let i = 0; i < data.length; i++) {
-                const user = new User(data[i].id, data[i].username, data[i].totalScore, avatarIcon);
-                console.log(user);
+            for (let i = 0; i < data.users.length; i++) {
+                const user = new User(data.users[i].id, data.users[i].name, data.users[i].score, avatarIcon);
                 usersArr.push(user);
             }
             setUsers(usersArr);
-        }
-        getRankings();
+        }());
     }, [selected]);
 
     return (
@@ -66,16 +64,16 @@ function Leaderboard () {
                         <LeaderboardSelector selected={setSelected}></LeaderboardSelector>
                         <img src={crownIcon} className={styles.crown}></img>
                         <div className={styles['winners-container']}>
-                            <Winners src={avatarIcon} result="2" name={users[1]?.username} score={users[1]?.totalScore}></Winners>
-                            <Winners src={avatarIcon} result="1" name={users[0]?.username} score={users[0]?.totalScore}></Winners>
-                            <Winners src={avatarIcon} result="3" name={users[2]?.username} score={users[2]?.totalScore}></Winners>
+                            <Winners src={avatarIcon} result="2" name={users[1]?.name} score={users[1]?.score}></Winners>
+                            <Winners src={avatarIcon} result="1" name={users[0]?.name} score={users[0]?.score}></Winners>
+                            <Winners src={avatarIcon} result="3" name={users[2]?.name} score={users[2]?.score}></Winners>
                         </div>
                     </div>
                 </div>
             </div>
             <div className={styles['top-10']}>
                 {users.map((user, index) => 
-                    index >= 4 && index <= 10 && <Rank key={index} src={user?.img} name={user?.username} score={user?.totalScore} result={index + 1}></Rank>
+                    index >= 4 && index <= 10 && <Rank key={index} src={user?.img} name={user?.name} score={user?.score} result={index + 1}></Rank>
                 )}
             </div>
         </div>

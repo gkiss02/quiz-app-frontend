@@ -42,7 +42,7 @@ function Main () {
     }
 
     useEffect(() => {
-        async function fetchMyData () {
+        (async function () {
             const response = await fetch('http://localhost:8080/users/me', {
                 method: 'GET',
                 headers: {
@@ -52,8 +52,7 @@ function Main () {
 
             const data = await response.json();
             setUser(data);
-        }
-        fetchMyData();
+        }())
     }, []);
 
     return (
@@ -64,7 +63,6 @@ function Main () {
                     <p className={styles['welcome-text']}>Let's make this day productive</p>
                 </div>
                 <div className={styles['profile-container']}>
-                    <img src={user.profilePicture} className={styles['profile-picture']} onClick={profileMenuHandler}></img>
                     {profileMenu && <ProfileMenu></ProfileMenu>}
                 </div>
             </header>
@@ -88,7 +86,6 @@ function Main () {
             </div>
             {visible && <Modal closeModal={closeModal} id={id}></Modal>}
         </div>
-    )
-}
+    )}
 
 export default Main
