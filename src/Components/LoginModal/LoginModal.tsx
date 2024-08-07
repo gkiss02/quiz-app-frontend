@@ -13,7 +13,7 @@ const LoginModal: React.FC<({closeModal: () => void})> = (props) => {
             <div className={styles.form}>
                 <div className={styles['form-container']}>
                     <div className={styles['form-item']}>
-                        <label>Username or email address</label>
+                        <label>name or email address</label>
                         <input type="text" className={styles.input}></input>
                     </div>
                     <div className={styles['form-item']}>

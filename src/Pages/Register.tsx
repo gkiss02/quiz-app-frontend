@@ -18,24 +18,24 @@ class Error {
 }
 
 function Register () {
-    let userNameRef = useRef<HTMLInputElement>(null);
+    let nameRef = useRef<HTMLInputElement>(null);
     let emailRef = useRef<HTMLInputElement>(null);
     let passwordRef = useRef<HTMLInputElement>(null);
-    let passwordConfirmRef = useRef<HTMLInputElement>(null);
+    let confirmPasswordRef = useRef<HTMLInputElement>(null);
     const [errors, setErrors] = useState<Error[]>([]);
     const navigate = useNavigate();
 
     async function handleRegister() {
-        const response = await fetch('http://localhost:8080/auth/register', {
+        const response = await fetch('http://localhost:8080/users/createUser', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                username: userNameRef.current?.value,
+                name: nameRef.current?.value,
                 email: emailRef.current?.value,
                 password: passwordRef.current?.value,
-                passwordConfirm: passwordConfirmRef.current?.value
+                confirmPassword: confirmPasswordRef.current?.value
             })
         })
         const data = await response.json();
@@ -61,16 +61,16 @@ function Register () {
                 <p>Please sign up below</p>
             </div>
             <div className={styles['input-container']}>
-                <input type='text' className={`${styles.input} ${errors.find(x => x.path == 'username') && styles['error-border']}`} placeholder='Username' ref={userNameRef}/>
-                    {errors.length > 0 && errors.find(x => x.path == 'username') && 
-                    <p className={styles['error-text']}>{errors.find(x => x.path == 'username')?.msg}</p>}
+                <input type='text' className={`${styles.input} ${errors.find(x => x.path == 'name') && styles['error-border']}`} placeholder='name' ref={nameRef}/>
+                    {errors.length > 0 && errors.find(x => x.path == 'name') && 
+                    <p className={styles['error-text']}>{errors.find(x => x.path == 'name')?.msg}</p>}
                 <input type='text' className={`${styles.input} ${errors.find(x => x.path == 'email') && styles['error-border']}`} placeholder='Email' ref={emailRef}/>
                 {errors.length > 0 && errors.find(x => x.path == 'email') && 
                     <p className={styles['error-text']}>{errors.find(x => x.path == 'email')?.msg}</p>}
                 <input type='password' className={`${styles.input} ${errors.find(x => x.path == 'password') && styles['error-border']}`} placeholder='Password' ref={passwordRef}/>
                 {errors.length > 0 && errors.find(x => x.path == 'password') && 
                     <p className={styles['error-text']}>{errors.find(x => x.path == 'password')?.msg}</p>}
-                <input type='password' className={`${styles.input} ${errors.find(x => x.path == 'password') && styles['error-border']}`} placeholder='Confirm password' ref={passwordConfirmRef}/>
+                <input type='password' className={`${styles.input} ${errors.find(x => x.path == 'password') && styles['error-border']}`} placeholder='Confirm password' ref={confirmPasswordRef}/>
             </div>
             <button className={styles.button} onClick={handleRegister}>Sign up</button>
             <div>

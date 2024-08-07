@@ -59,7 +59,7 @@ function Main () {
         <div className={styles.container}>
             <header className={styles.header}>
                 <div>
-                    <h2>Hi, {user.username}</h2>
+                    <h2>Hi, {user.name}</h2>
                     <p className={styles['welcome-text']}>Let's make this day productive</p>
                 </div>
                 <div className={styles['profile-container']}>
