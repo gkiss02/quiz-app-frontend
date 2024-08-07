@@ -64,6 +64,7 @@ function Main () {
                 </div>
                 <div className={styles['profile-container']}>
                     {profileMenu && <ProfileMenu></ProfileMenu>}
+                    <img src={user.profilePicture} className={styles['profile-picture']} onClick={profileMenuHandler}></img>
                 </div>
             </header>
             <ResultCard></ResultCard>

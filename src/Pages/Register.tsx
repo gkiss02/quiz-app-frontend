@@ -23,6 +23,10 @@ function Register () {
     let passwordRef = useRef<HTMLInputElement>(null);
     let confirmPasswordRef = useRef<HTMLInputElement>(null);
     const [errors, setErrors] = useState<Error[]>([]);
+    const [isNameValid, setIsNameValid] = useState<boolean>(false);
+    const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
+    const [isPasswordValid, setIsPasswordValid] = useState<boolean>(false);
+    const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState<boolean>(false);
     const navigate = useNavigate();
 
     async function handleRegister() {
@@ -40,19 +44,26 @@ function Register () {
         })
         const data = await response.json();
 
-        if (response.status === 422) {
+        if (response.status === 400) {
             let arr: Error[] = [];
             data.errors.forEach((error: any) => {
                 arr.push(new Error(error.type, error.value, error.msg, error.path, error.location));
             })
             setErrors(arr);
+
+            errors.find(x => x.path == 'name') ? setIsNameValid(false) : setIsNameValid(true);
+            errors.find(x => x.path == 'email') ? setIsEmailValid(false) : setIsEmailValid(true);
+            errors.find(x => x.path == 'password' || x.path == 'confirmPassword') ? setIsPasswordValid(false) : setIsPasswordValid(true);
+            errors.find(x => x.path == 'confirmPassword') ? setIsConfirmPasswordValid(false) : setIsConfirmPasswordValid(true);
+
+            console.log(isNameValid);
+            console.log(isEmailValid);
         }
 
         if (response.ok) {
             navigate('/');
         }
     }
-
     
     return (
         <div className={styles.container}>
@@ -61,16 +72,16 @@ function Register () {
                 <p>Please sign up below</p>
             </div>
             <div className={styles['input-container']}>
-                <input type='text' className={`${styles.input} ${errors.find(x => x.path == 'name') && styles['error-border']}`} placeholder='name' ref={nameRef}/>
-                    {errors.length > 0 && errors.find(x => x.path == 'name') && 
+                <input type='text' className={`${styles.input} ${isNameValid && styles['error-border']}`} placeholder='Name' ref={nameRef} onChange={() => setIsNameValid(false)}/>
+                {errors.length > 0 && isNameValid && 
                     <p className={styles['error-text']}>{errors.find(x => x.path == 'name')?.msg}</p>}
-                <input type='text' className={`${styles.input} ${errors.find(x => x.path == 'email') && styles['error-border']}`} placeholder='Email' ref={emailRef}/>
-                {errors.length > 0 && errors.find(x => x.path == 'email') && 
+                <input type='text' className={`${styles.input} ${isEmailValid && styles['error-border']}`} placeholder='Email' ref={emailRef} onChange={() => setIsEmailValid(false)}/>
+                {errors.length > 0 && isEmailValid && 
                     <p className={styles['error-text']}>{errors.find(x => x.path == 'email')?.msg}</p>}
-                <input type='password' className={`${styles.input} ${errors.find(x => x.path == 'password') && styles['error-border']}`} placeholder='Password' ref={passwordRef}/>
+                <input type='password' className={`${styles.input} ${errors.find(x => x.path == 'password' ||  x.path == 'confirmPassword') && styles['error-border']}`} placeholder='Password' ref={passwordRef}/>
                 {errors.length > 0 && errors.find(x => x.path == 'password') && 
                     <p className={styles['error-text']}>{errors.find(x => x.path == 'password')?.msg}</p>}
-                <input type='password' className={`${styles.input} ${errors.find(x => x.path == 'password') && styles['error-border']}`} placeholder='Confirm password' ref={confirmPasswordRef}/>
+                <input type='password' className={`${styles.input} ${errors.find(x => x.path == 'confirmPassword') && styles['error-border']}`} placeholder='Confirm password' ref={confirmPasswordRef}/>
             </div>
             <button className={styles.button} onClick={handleRegister}>Sign up</button>
             <div>
