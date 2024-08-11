@@ -11,6 +11,7 @@ function ProfileMenu () {
     }
 
     function logout () {
+        localStorage.removeItem('token');
         navigate('/')
     }
 
