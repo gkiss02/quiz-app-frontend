@@ -2,14 +2,12 @@ import styles from './Result.module.css'
 import { useNavigate } from 'react-router-dom';
 import BlueButton from '../UI/BlueButton';
 import { useContext, useEffect, useState } from 'react';
-import { TimeCTX, QuestionsCTX, ScoreCTX } from '../Context/Context';
+import { TimeCTX } from '../Context/Context';
 import { getAuthToken } from '../Util/auth';
 
 function Result () {
     const navigate = useNavigate();
     const timeCTX = useContext(TimeCTX);
-    const questionsCTX = useContext(QuestionsCTX);
-    const scoreCTX = useContext(ScoreCTX);
     const [latestGame, setLatestGame] = useState(Object);
 
     function backHandler () {
@@ -18,7 +16,7 @@ function Result () {
     }
 
     useEffect(() => {
-        async function getLatestGameScore () {
+        (async function () {
             const response = await fetch('http://localhost:8080/game/getLatestGameScore', {
                 method: 'GET',
                 headers: {
@@ -27,8 +25,7 @@ function Result () {
             })
             const data = await response.json();
             setLatestGame(data);
-        }
-        getLatestGameScore();
+        })();
     }, [])
 
     return (

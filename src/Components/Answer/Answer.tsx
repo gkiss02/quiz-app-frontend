@@ -21,7 +21,7 @@ const Answer: React.FC <AnswerProps> = (props) => {
 
     async function increaseScore () {
         const response = await fetch('http://localhost:8080/game/increaseScore', {
-            method: 'PATCH',
+            method: 'PUT',
             headers: {
                 'Authorization': 'Bearer ' + getAuthToken(),
             }

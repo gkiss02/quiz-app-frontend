@@ -6,7 +6,6 @@ import Question from "./Pages/Question";
 import Questions from "./Context/Questions";
 import Time from "./Context/Time";
 import Result from "./Pages/Result";
-import Score from "./Context/Score";
 import Settings from "./Pages/Settings";
 import Leaderboard from "./Pages/Leaderboard";
 import ErrorPage from "./Pages/ErrorPage";
@@ -32,9 +31,7 @@ function App() {
   return (
     <Questions>
       <Time>
-        <Score>
-          <RouterProvider router={router}></RouterProvider>
-        </Score>
+        <RouterProvider router={router}></RouterProvider>
       </Time>
     </Questions>
   );
