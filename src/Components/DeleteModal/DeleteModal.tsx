@@ -3,7 +3,7 @@ import ButtonContainer from "../../UI/ButtonContainer";
 import Modal from "../../UI/Modal";
 import RedButton from "../../UI/RedButton";
 import styles from './DeleteModal.module.css';
-import { getAuthToken } from "../../util/auth";
+import { getAuthToken } from "../../Util/auth";
 import { useNavigate } from "react-router-dom";
 
 const DeleteModal: React.FC <({closeModal: () => void})> = (props) => {

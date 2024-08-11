@@ -4,7 +4,7 @@ import { faX } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useContext } from 'react';
 import { ScoreCTX } from '../../Context/Context';
-import { getAuthToken } from '../../util/auth';
+import { getAuthToken } from '../../Util/auth';
 
 type AnswerProps = {
     answer: string,

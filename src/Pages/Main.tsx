@@ -5,14 +5,14 @@ import Modal from '../Components/StartModal/StartModal';
 import ProfileMenu from '../Components/ProfileMenu/ProfileMenu'
 import { useState, useContext, useEffect } from 'react';
 import { QuestionsCTX } from '../Context/Context';
-import { getAuthToken } from '../util/auth';
-import User from '../util/User';
+import { getAuthToken } from '../Util/auth';
+import { User } from '../Types/User';
 
 function Main () {
     const [visible, setVisible] = useState(false);
     const [profileMenu, setProfileMenu] = useState(false);
     const [id, setId] = useState('0');
-    const [user, setUser] = useState(new User(0, '', '', '', ''));
+    const [user, setUser] = useState<User>();
     const setNotEnough = useContext(QuestionsCTX).setNotEnough;
 
     const musicIcon = require('../Images/001-musical-notes.png');
@@ -59,12 +59,12 @@ function Main () {
         <div className={styles.container}>
             <header className={styles.header}>
                 <div>
-                    <h2>Hi, {user.name}</h2>
+                    <h2>Hi, {user?.name}</h2>
                     <p className={styles['welcome-text']}>Let's make this day productive</p>
                 </div>
                 <div className={styles['profile-container']}>
                     {profileMenu && <ProfileMenu></ProfileMenu>}
-                    <img src={user.profilePicture} className={styles['profile-picture']} onClick={profileMenuHandler}></img>
+                    <img src={user?.profilePicture} className={styles['profile-picture']} onClick={profileMenuHandler}></img>
                 </div>
             </header>
             <ResultCard></ResultCard>

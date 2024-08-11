@@ -2,7 +2,7 @@ import styles from './ResultCard.module.css'
 import ResultComponent from './ResultComponent'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { getAuthToken } from '../../util/auth'
+import { getAuthToken } from '../../Util/auth'
 
 function ResultCard () {
     const trophyIcon = require('../../Images/trophy.png')

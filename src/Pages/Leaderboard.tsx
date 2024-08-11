@@ -4,25 +4,13 @@ import Winners from '../Components/Winners/Winners';
 import Rank from '../Components/Rank/Rank';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getAuthToken } from '../util/auth';
-
-class User {
-    id: number;
-    name: string;
-    score: string;
-    img: string;
-    constructor(id: number, name: string, score: string, img: string) {
-        this.id = id;
-        this.name = name;
-        this.score = score;
-        this.img = img;
-    }
-}
+import { getAuthToken } from '../Util/auth';
+import { UserWithScore } from '../Types/UserWithScore';
 
 function Leaderboard () {
     const navigate = useNavigate();
     const [selected, setSelected] = useState('allTime')
-    const [users, setUsers] = useState<User[]>([])
+    const [users, setUsers] = useState<UserWithScore[]>([])
 
     const backIcon = require('../Images/back-white.png')
     const avatarIcon = require('../Images/man.png')
@@ -41,10 +29,9 @@ function Leaderboard () {
                 }
             })
             const data = await response.json();
-            let usersArr = [];
+            let usersArr: UserWithScore[] = [];
             for (let i = 0; i < data.users.length; i++) {
-                const user = new User(data.users[i].id, data.users[i].name, data.users[i].score, avatarIcon);
-                usersArr.push(user);
+                usersArr.push(data.users[i]);
             }
             setUsers(usersArr);
         }());

@@ -7,7 +7,7 @@ import BlueButton from '../../UI/BlueButton'
 import RedButton from '../../UI/RedButton'
 import ButtonContainer from '../../UI/ButtonContainer';
 import styles from './StartModal.module.css'
-import { getAuthToken } from '../../util/auth'
+import { getAuthToken } from '../../Util/auth'
 
 const StartModal: React.FC <({closeModal: () => void, id: string})> = (props) => {
     const [difficulty, setDifficulty] = useState('easy');

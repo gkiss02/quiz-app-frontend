@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import BlueButton from '../UI/BlueButton';
 import { useContext, useEffect, useState } from 'react';
 import { TimeCTX, QuestionsCTX, ScoreCTX } from '../Context/Context';
-import { getAuthToken } from '../util/auth';
+import { getAuthToken } from '../Util/auth';
 
 function Result () {
     const navigate = useNavigate();
