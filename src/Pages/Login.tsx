@@ -22,10 +22,13 @@ function Login () {
             })
         })
         const data = await response.json();
-        localStorage.setItem('token', data.token);
-
+        
         if (response.ok) {
-            navigate('/main');
+            localStorage.setItem('token', data.token);
+            const expirationDate = new Date();
+            expirationDate.setHours(expirationDate.getHours() + 1);
+            localStorage.setItem('expirationDate', expirationDate.toISOString());
+            navigate('/');
         }
 
         if (response.status === 401) {

@@ -13,7 +13,7 @@ const QuitModal:React.FC <({closeModal: () => void})> = (props) => {
     const scoreCTX = useContext(ScoreCTX);
 
     function backHandler () {
-        navigate('/main');
+        navigate("/");
         timeCTX.setTime(30);
         scoreCTX.setScore(0);
     }

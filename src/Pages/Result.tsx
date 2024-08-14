@@ -11,7 +11,7 @@ function Result () {
     const [latestGame, setLatestGame] = useState(Object);
 
     function backHandler () {
-        navigate('/main');
+        navigate("/");
         timeCTX.setTime(30);
     }
 

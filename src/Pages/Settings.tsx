@@ -27,7 +27,7 @@ function Settings() {
   const backIcon = require("../Images/back.png");
 
   function toHome() {
-    navigate("/main");
+    navigate("/");
   }
 
   function showModalHandler() {

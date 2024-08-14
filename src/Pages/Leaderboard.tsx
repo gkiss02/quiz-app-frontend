@@ -17,7 +17,7 @@ function Leaderboard () {
     const crownIcon = require('../Images/crown.png')
 
     function toHome () {
-        navigate('/main')
+        navigate("/")
     }
 
     useEffect(() => {
