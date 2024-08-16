@@ -43,7 +43,7 @@ function Main () {
 
     useEffect(() => {
         (async function () {
-            const response = await fetch('http://localhost:8080/users/me', {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/users/me`, {
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + getAuthToken()

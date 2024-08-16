@@ -11,7 +11,7 @@ function Login () {
     const navigate = useNavigate();
 
     async function handleLogin() {
-        const response = await fetch('http://localhost:8080/auth/login', {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -24,10 +24,11 @@ function Login () {
         const data = await response.json();
         
         if (response.ok) {
-            localStorage.setItem('token', data.token);
+            sessionStorage.setItem('accessToken', data.accessToken);
+            sessionStorage.setItem('refreshToken', data.refreshToken);
             const expirationDate = new Date();
             expirationDate.setHours(expirationDate.getHours() + 1);
-            localStorage.setItem('expirationDate', expirationDate.toISOString());
+            sessionStorage.setItem('expirationDate', expirationDate.toISOString());
             navigate('/');
         }
 

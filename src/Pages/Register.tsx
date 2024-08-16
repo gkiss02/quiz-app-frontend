@@ -12,7 +12,7 @@ function Register () {
     const navigate = useNavigate();
 
     async function handleRegister() {
-        const response = await fetch('http://localhost:8080/users/createUser', {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/users/createUser`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

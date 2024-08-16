@@ -1,7 +1,9 @@
 import styles from './ProfileMenu.module.css'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSubmit } from 'react-router-dom';
 
 function ProfileMenu () {
+    const submit = useSubmit();
+
     const settingsIcon  = require('../../Images/settings.png')
     const logoutIcon = require('../../Images/check-out.png')
     const navigate = useNavigate();
@@ -11,8 +13,7 @@ function ProfileMenu () {
     }
 
     function logout () {
-        localStorage.removeItem('token');
-        navigate('/')
+        submit(null, { action: '/logout', method: 'post' });
     }
 
     return (

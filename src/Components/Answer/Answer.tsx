@@ -20,7 +20,7 @@ const Answer: React.FC <AnswerProps> = (props) => {
     const scoreCTX = useContext(ScoreCTX);
 
     async function increaseScore () {
-        const response = await fetch('http://localhost:8080/game/increaseScore', {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/game/increaseScore`, {
             method: 'PUT',
             headers: {
                 'Authorization': 'Bearer ' + getAuthToken(),

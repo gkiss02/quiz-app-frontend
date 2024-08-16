@@ -1,7 +1,7 @@
 import { redirect } from "react-router-dom";
 
 export function getTokenDuration() {
-    const storedExpirationDate = localStorage.getItem('expirationDate');
+    const storedExpirationDate = sessionStorage.getItem('expirationDate');
     if (!storedExpirationDate) {
         return redirect('/errorPage');
     }
@@ -13,7 +13,7 @@ export function getTokenDuration() {
 }
 
 export function getAuthToken() {
-    const token = localStorage.getItem('token');
+    const accessToken = sessionStorage.getItem('accessToken');
 
     const tokenDuration = getTokenDuration();
 
@@ -21,20 +21,37 @@ export function getAuthToken() {
         return 'EXPIRED';
     }
 
-    return token;
+    return accessToken;
 }
 
 export function tokenLoader() {
-    const token = getAuthToken();
-    return token;
+    const accessToken = getAuthToken();
+    return accessToken;
 }
 
 export function checkAuthLoader() {
-    const token = getAuthToken();
+    const accessToken = getAuthToken();
 
-    if (!token) {
+    if (!accessToken) {
         return redirect('/login');
     }
 
     return null;
 }
+
+setInterval( async() => {
+    sessionStorage.getItem('refreshToken');
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/refresh`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            refreshToken: sessionStorage.getItem('refreshToken'),
+        }),
+    });
+
+    const data = await response.json();
+    sessionStorage.setItem('accessToken', data.accessToken);
+    sessionStorage.setItem('expirationDate', data.expirationDate);
+} , 30 * 60 * 1000);

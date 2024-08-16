@@ -17,7 +17,7 @@ function Result () {
 
     useEffect(() => {
         (async function () {
-            const response = await fetch('http://localhost:8080/game/getLatestGameScore', {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/game/getLatestGameScore`, {
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + getAuthToken(),
