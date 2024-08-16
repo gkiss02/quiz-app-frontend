@@ -33,7 +33,7 @@ function Result () {
             <div className={styles['text-container']}>
                 <p>Congrats!</p>
                 <p>You've got</p>
-                <p className={styles.score}>{`${latestGame?.score}/${latestGame?.difficulty * 10}`}</p>
+                <p className={styles.score}>{`${latestGame?.score}/${latestGame?.difficulty * latestGame?.numberOfQuestions}`}</p>
             </div>                
                 <BlueButton onClick={backHandler}>Back</BlueButton>
         </div>

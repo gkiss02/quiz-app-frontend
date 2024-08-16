@@ -42,12 +42,16 @@ const StartModal: React.FC <({closeModal: () => void, id: string})> = (props) =>
     }
 
     async function createGame () {
-        const response = await fetch(`http://localhost:8080/game/createGame/${difficultyNumber}`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/game/createGame`, {
             method: 'POST',
             headers: {
                 'Authorization': 'Bearer ' + getAuthToken(),
                 'Content-Type': 'application/json',
             },
+            body: JSON.stringify({
+                difficulty: difficultyNumber,
+                numberOfQuestions: numberOfQuestions,
+            })
         });
     }
 
