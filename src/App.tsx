@@ -12,6 +12,7 @@ import ErrorPage from "./Pages/ErrorPage";
 import Register from "./Pages/Register";
 import { checkAuthLoader, tokenLoader } from "./Util/auth"; 
 import { logoutAction } from "./Util/logoutAction";
+import ConfirmEmail from "./Pages/ConfirmEmail";
 
 
 function App() {
@@ -29,7 +30,8 @@ function App() {
       { path: "/settings", element: <Settings></Settings>, loader: checkAuthLoader },
       { path: "/leaderboard", element: <Leaderboard></Leaderboard>, loader: checkAuthLoader },
       { path: "*", element: <ErrorPage></ErrorPage> },
-      { path: "/logout", action: logoutAction}
+      { path: "/logout", action: logoutAction},
+      { path : "/confirmEmail", element: <ConfirmEmail></ConfirmEmail> }
     ]
   }])
   
