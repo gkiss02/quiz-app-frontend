@@ -4,8 +4,8 @@ import styles from './Input.module.css'
 type InputProps = {
     type: string,
     placeholder: string,
-    isValid: boolean,
-    errorMessage: string | undefined,
+    isValid?: boolean,
+    errorMessage?: string | undefined,
     setValue: (s: string | undefined) => void
 }
 

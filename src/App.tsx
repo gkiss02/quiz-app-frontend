@@ -13,6 +13,8 @@ import Register from "./Pages/Register";
 import { checkAuthLoader, tokenLoader } from "./Util/auth"; 
 import { logoutAction } from "./Util/logoutAction";
 import ConfirmEmail from "./Pages/ConfirmEmail";
+import ForgotPassword from "./Pages/ForgotPassword";
+import ResetPassword from "./Pages/ResetPassword";
 
 
 function App() {
@@ -31,7 +33,9 @@ function App() {
       { path: "/leaderboard", element: <Leaderboard></Leaderboard>, loader: checkAuthLoader },
       { path: "*", element: <ErrorPage></ErrorPage> },
       { path: "/logout", action: logoutAction},
-      { path : "/confirmEmail", element: <ConfirmEmail></ConfirmEmail> }
+      { path: "/confirmEmail", element: <ConfirmEmail></ConfirmEmail> },
+      { path: "/forgot-password", element: <ForgotPassword></ForgotPassword> },
+      { path: "/reset-password", element: <ResetPassword></ResetPassword> },
     ]
   }])
   

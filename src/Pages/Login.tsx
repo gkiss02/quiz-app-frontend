@@ -5,6 +5,9 @@ import { useState } from 'react';
 import FormContainer from '../UI/FromContainer';
 import BlueButton from '../UI/BlueButton';
 import Input from '../Components/Input/Input';
+import { Checkbox } from '@mui/material';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 function Login () {
     const [email, setEmail] = useState<string>();
@@ -58,14 +61,30 @@ function Login () {
                     type='password' 
                     placeholder='Password' 
                     isValid={invalidUser}
-                    errorMessage='Invalid email or password'
                     setValue={setPassword}
                 />
+            </div>
+            <div className={styles.wrapper}>
+                <div className={styles['remember-me']}>
+                <Checkbox
+                    icon={<BookmarkBorderIcon />}
+                    checkedIcon={<BookmarkIcon />}
+                    sx={{
+                        color: '#3eb8d4',
+                        '&.Mui-checked': {
+                            color: '#3eb8d4'
+                        },
+                        '& .MuiSvgIcon-root': { fontSize: 20 }
+                    }}
+                />
+                    <p>Remember me</p>
+                </div>
+                <Link to='/forgot-password'>Forgot password?</Link>
             </div>
             <BlueButton onClick={handleLogin} isBig={true}>Login</BlueButton>
             <div>
                 <p>Don't have an account?<br></br>
-                <span className={styles.register}><Link to='/register'>Register</Link></span></p>
+                <span className={styles['register-link']}><Link to='/register'>Register</Link></span></p>
             </div>
         </FormContainer>
     )

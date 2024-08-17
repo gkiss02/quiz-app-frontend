@@ -10,9 +10,21 @@
     gap: 1rem;
 }
 
-.register {
+.register-link {
     color: #058aa7;
     font-size: 1.5rem;
     font-weight: bold;
     cursor: pointer;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: -2rem 0 -1rem;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
 }

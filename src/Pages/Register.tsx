@@ -81,7 +81,7 @@ function Register () {
             <BlueButton onClick={handleRegister} isBig={true}>Sign up</BlueButton>
             <div>
                 <p>Already have account?<br></br>
-                <span className={styles.register}><Link to='/'>Login</Link></span></p>
+                <span className={styles['login-link']}><Link to='/'>Login</Link></span></p>
             </div>
         </FormContainer>
     )
