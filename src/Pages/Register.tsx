@@ -1,15 +1,18 @@
 import styles from './Register.module.css';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { BackendError } from '../Types/BackendError';
+import FormContainer from '../UI/FromContainer';
+import Input from '../Components/Input/Input';
+import BlueButton from '../UI/BlueButton';
 
 function Register () {
-    let nameRef = useRef<HTMLInputElement>(null);
-    let emailRef = useRef<HTMLInputElement>(null);
-    let passwordRef = useRef<HTMLInputElement>(null);
-    let confirmPasswordRef = useRef<HTMLInputElement>(null);
     const [errors, setErrors] = useState<BackendError[]>([]);
     const navigate = useNavigate();
+    const [name, setName] = useState<string>();
+    const [email, setEmail] = useState<string>();
+    const [password, setPassword] = useState<string>();
+    const [confirmPassword, setConfirmPassword] = useState<string>();
 
     async function handleRegister() {
         const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/users/createUser`, {
@@ -18,10 +21,10 @@ function Register () {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                name: nameRef.current?.value,
-                email: emailRef.current?.value,
-                password: passwordRef.current?.value,
-                confirmPassword: confirmPasswordRef.current?.value
+                name,
+                email,
+                password,
+                confirmPassword,
             })
         })
         const data = await response.json();
@@ -40,29 +43,47 @@ function Register () {
     }
     
     return (
-        <div className={styles.container}>
+        <FormContainer>
             <div className={styles['text-container']}>
                 <h1>Sign up</h1>
                 <p>Please sign up below</p>
             </div>
             <div className={styles['input-container']}>
-                <input type='text' className={`${styles.input} ${errors.find(x => x.path == 'name') && styles['error-border']}`} placeholder='Name' ref={nameRef}/>
-                    {errors.length > 0 && errors.find(x => x.path == 'name') && 
-                    <p className={styles['error-text']}>{errors.find(x => x.path == 'name')?.msg}</p>}
-                <input type='text' className={`${styles.input} ${errors.find(x => x.path == 'email') && styles['error-border']}`} placeholder='Email' ref={emailRef}/>
-                    {errors.length > 0 && errors.find(x => x.path == 'email') && 
-                    <p className={styles['error-text']}>{errors.find(x => x.path == 'email')?.msg}</p>}
-                <input type='password' className={`${styles.input} ${errors.find(x => x.path == 'password') && styles['error-border']}`} placeholder='Password' ref={passwordRef}/>
-                    {errors.length > 0 && errors.find(x => x.path == 'password') && 
-                    <p className={styles['error-text']}>{errors.find(x => x.path == 'password')?.msg}</p>}
-                <input type='password' className={`${styles.input} ${errors.find(x => x.path == 'password') && styles['error-border']}`} placeholder='Confirm password' ref={confirmPasswordRef}/>
+                <Input 
+                    type='text' 
+                    placeholder='Name' 
+                    isValid={errors.find(x => x.path == 'name') ? true : false} 
+                    errorMessage={errors.find(x => x.path == 'name')?.msg} 
+                    setValue={setName}
+                />
+                <Input 
+                    type='email' 
+                    placeholder='Email' 
+                    isValid={errors.find(x => x.path == 'email') ? true : false} 
+                    errorMessage={errors.find(x => x.path == 'email')?.msg} 
+                    setValue={setEmail}
+                />
+                <Input 
+                    type='password' 
+                    placeholder='Password' 
+                    isValid={errors.find(x => x.path == 'password' || x.path == 'confirmPassword') ? true : false} 
+                    errorMessage={errors.find(x => x.path == 'password')?.msg} 
+                    setValue={setPassword}
+                />
+                <Input 
+                    type='password' 
+                    placeholder='Confirm password' 
+                    isValid={errors.find(x => x.path == 'confirmPassword') ? true : false} 
+                    errorMessage={errors.find(x => x.path == 'confirmPassword')?.msg} 
+                    setValue={setConfirmPassword}
+                />
             </div>
-            <button className={styles.button} onClick={handleRegister}>Sign up</button>
+            <BlueButton onClick={handleRegister} isBig={true}>Sign up</BlueButton>
             <div>
                 <p>Already have account?<br></br>
                 <span className={styles.register}><Link to='/'>Login</Link></span></p>
             </div>
-        </div>
+        </FormContainer>
     )
 }
 

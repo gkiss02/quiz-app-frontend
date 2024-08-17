@@ -14,8 +14,3 @@ export const TimeCTX = createContext({
     time: 30,
     setTime: (time: number) => {},
 });
-
-export const ScoreCTX = createContext({
-    score: 0,
-    setScore: (score: number) => {},
-});

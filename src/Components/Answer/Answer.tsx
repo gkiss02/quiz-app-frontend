@@ -2,8 +2,7 @@ import styles from './Answer.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useContext } from 'react';
-import { ScoreCTX } from '../../Context/Context';
+import { useEffect } from 'react';
 import { getAuthToken } from '../../Util/auth';
 
 type AnswerProps = {
@@ -17,8 +16,6 @@ type AnswerProps = {
 }
 
 const Answer: React.FC <AnswerProps> = (props) => {
-    const scoreCTX = useContext(ScoreCTX);
-
     async function increaseScore () {
         const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/game/increaseScore`, {
             method: 'PUT',

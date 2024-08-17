@@ -1,0 +1,23 @@
+.input {
+    background-color: #F1F2F6;
+    height: 4rem;
+    width: 28rem;
+    border-radius: 10px;
+    padding: 0 1rem;
+    font-size: 1.5rem;
+    border: .1rem solid white;
+}
+
+.input:focus {
+    border: .1rem solid #058aa7;
+}
+
+.error-text {
+    text-align: left;
+    color: #FF5341;
+    max-width: 28rem;
+}
+
+.error-border {
+    border: .1rem solid #FF5341 !important;
+}

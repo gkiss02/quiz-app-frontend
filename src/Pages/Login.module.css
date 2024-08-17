@@ -1,17 +1,3 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-    color: #404D61;
-    font-size: 1.5rem;
-    text-align: center;
-    margin: 5rem auto;
-    width: fit-content;
-    box-shadow: 0px 2px 5px .5px black;
-    border-radius: 10px;
-    padding: 2rem;
-}
-
 .text-container {
     display: flex;
     flex-direction: column;
@@ -24,47 +10,9 @@
     gap: 1rem;
 }
 
-.input {
-    background-color: #F1F2F6;
-    height: 4rem;
-    width: 28rem;
-    border-radius: 10px;
-    padding: 0 1rem;
-    font-size: 1.5rem;
-    border: .1rem solid white;
-}
-
-.input:focus {
-    border: .1rem solid #058aa7;
-}
-
-.button {
-    background-color: #3eb8d4;
-    color: #F1F2F6;
-    height: 4rem;
-    width: 30rem;
-    border-radius: 10px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.button:hover {
-    background-color: #058aa7;
-}
-
 .register {
     color: #058aa7;
     font-size: 1.5rem;
     font-weight: bold;
     cursor: pointer;
-}
-
-.error-text {
-    text-align: center;
-    color: #FF5341;
-}
-
-.error-border {
-    border: .1rem solid #FF5341 !important;
 }

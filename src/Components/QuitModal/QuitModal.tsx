@@ -5,17 +5,15 @@ import RedButton from "../../UI/RedButton";
 import ButtonContainer from "../../UI/ButtonContainer";
 import { useNavigate } from "react-router-dom";
 import { useContext } from 'react';
-import { TimeCTX, ScoreCTX } from '../../Context/Context';
+import { TimeCTX } from '../../Context/Context';
 
 const QuitModal:React.FC <({closeModal: () => void})> = (props) => {
     const navigate = useNavigate();
     const timeCTX = useContext(TimeCTX);
-    const scoreCTX = useContext(ScoreCTX);
 
     function backHandler () {
         navigate("/");
         timeCTX.setTime(30);
-        scoreCTX.setScore(0);
     }
 
     return (
