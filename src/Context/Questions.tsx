@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { QuestionsCTX } from "./Context";
+import { useState } from 'react';
+import { QuestionsCTX } from './Context';
 
 const Questions: React.FC<({children: React.ReactNode})> = (props) => {
-    const [questions, setQuestions] = useState([{category: "", correct_answer: "", difficulty: "", incorrect_answers: [""], question: "", type: "", answers: [""]}]);
+    const [questions, setQuestions] = useState([{category: '', correct_answer: '', difficulty: '', incorrect_answers: [''], question: '', type: '', answers: ['']}]);
     const [loading, setLoading] = useState(false);
     const [ready, setReady] = useState(false);
     const [notEnough, setNotEnough] = useState(false);

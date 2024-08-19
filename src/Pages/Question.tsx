@@ -1,17 +1,17 @@
-import FilledBar from "../Components/FilledBar/FilledBar";
+import FilledBar from '../Components/FilledBar/FilledBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faX } from '@fortawesome/free-solid-svg-icons'
 import styles from './Question.module.css';
-import Timer from "../Components/Timer/Timer";
-import Answer from "../Components/Answer/Answer";
-import { useState, useContext, useEffect } from "react";
-import { QuestionsCTX, TimeCTX } from "../Context/Context";
-import TimeOutModal from "../Components/TimeOutModal/TimeOutModal";
-import { useNavigate } from "react-router-dom";
-import BlueButton from "../UI/BlueButton";
-import QuitModal from "../Components/QuitModal/QuitModal";
-import EmptyModal from "../Components/EmptyModal/EmptyModal";
-import ButtonContainer from "../UI/ButtonContainer";
+import Timer from '../Components/Timer/Timer';
+import Answer from '../Components/Answer/Answer';
+import { useState, useContext, useEffect } from 'react';
+import { QuestionsCTX, TimeCTX } from '../Context/Context';
+import TimeOutModal from '../Components/TimeOutModal/TimeOutModal';
+import { useNavigate } from 'react-router-dom';
+import BlueButton from '../UI/BlueButton';
+import QuitModal from '../Components/QuitModal/QuitModal';
+import EmptyModal from '../Components/EmptyModal/EmptyModal';
+import ButtonContainer from '../UI/ButtonContainer';
 
 function Question () {
     const questionsCTX = useContext(QuestionsCTX);

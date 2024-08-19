@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import BlueButton from "../UI/BlueButton";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
+import BlueButton from '../UI/BlueButton';
+import { useNavigate } from 'react-router-dom';
 import styles from './ConfirmEmail.module.css'
 
 function ConfirmEmail() {
@@ -23,7 +23,7 @@ function ConfirmEmail() {
     return (
         <div className={styles.container}>
             <h1>Email successfully confirmed!</h1>
-            <img src="https://i.ibb.co/SJGwnq8/check-mail.png" className={styles.icon}/>
+            <img src='https://i.ibb.co/SJGwnq8/check-mail.png' className={styles.icon}/>
             <BlueButton onClick={()=>navigate('/')}>Login</BlueButton>
         </div>
     );

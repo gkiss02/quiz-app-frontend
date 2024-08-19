@@ -17,7 +17,7 @@ function Leaderboard () {
     const crownIcon = require('../Images/crown.png')
 
     function toHome () {
-        navigate("/")
+        navigate('/')
     }
 
     useEffect(() => {
@@ -51,9 +51,9 @@ function Leaderboard () {
                         <LeaderboardSelector selected={setSelected}></LeaderboardSelector>
                         <img src={crownIcon} className={styles.crown}></img>
                         <div className={styles['winners-container']}>
-                            <Winners src={avatarIcon} result="2" name={users[1]?.name} score={users[1]?.score}></Winners>
-                            <Winners src={avatarIcon} result="1" name={users[0]?.name} score={users[0]?.score}></Winners>
-                            <Winners src={avatarIcon} result="3" name={users[2]?.name} score={users[2]?.score}></Winners>
+                            <Winners src={avatarIcon} result='2' name={users[1]?.name} score={users[1]?.score}></Winners>
+                            <Winners src={avatarIcon} result='1' name={users[0]?.name} score={users[0]?.score}></Winners>
+                            <Winners src={avatarIcon} result='3' name={users[2]?.name} score={users[2]?.score}></Winners>
                         </div>
                     </div>
                 </div>

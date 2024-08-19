@@ -1,9 +1,9 @@
-import { useState } from "react";
-import Input from "../Components/Input/Input";
-import FormContainer from "../UI/FromContainer";
-import BlueButton from "../UI/BlueButton";
-import styles from "./ForgotPassword.module.css";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import Input from '../Components/Input/Input';
+import FormContainer from '../UI/FromContainer';
+import BlueButton from '../UI/BlueButton';
+import styles from './ForgotPassword.module.css';
+import { useNavigate } from 'react-router-dom';
 
 function ForgotPassword() {
     const [email, setEmail] = useState<string>();
@@ -30,8 +30,8 @@ function ForgotPassword() {
                 <p>Please type your email below</p>
             </div>
             <Input
-                type="email"
-                placeholder="Email"
+                type='email'
+                placeholder='Email'
                 setValue={setEmail}
             />
             <BlueButton onClick={sendEmail} isBig={true}>Send Email</BlueButton>

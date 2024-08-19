@@ -1,34 +1,28 @@
-import styles from "./Settings.module.css";
-import BlueButton from "../UI/BlueButton";
-import ButtonContainer from "../UI/ButtonContainer";
-import Switch from "@mui/material/Switch";
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
-import { getAuthToken } from "../Util/auth";
-import { User } from "../Types/User";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import DeleteModal from "../Components/DeleteModal/DeleteModal";
-import { BackendError } from "../Types/BackendError";
+import styles from './Settings.module.css';
+import BlueButton from '../UI/BlueButton';
+import ButtonContainer from '../UI/ButtonContainer';
+import Switch from '@mui/material/Switch';
+import { useNavigate } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
+import { getAuthToken } from '../Util/auth';
+import { User } from '../Types/User';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faCheck } from '@fortawesome/free-solid-svg-icons';
+import DeleteModal from '../Components/DeleteModal/DeleteModal';
+import { BackendError } from '../Types/BackendError';
 
 function Settings() {
   const navigate = useNavigate();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-  const passwordConfirmRef = useRef<HTMLInputElement>(null);
+  const confirmPasswordRef = useRef<HTMLInputElement>(null);
   const [user, setUser] = useState<User>();
-  const [profilePicture, setProfilePicture] = useState("");
+  const [profilePicture, setProfilePicture] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [emailError, setEmailError] = useState<BackendError[]>([]);
   const [passwordError, setPasswordError] = useState<BackendError[]>([]);
 
   const pictures: string[] = [];
-  
-  const backIcon = require("../Images/back.png");
-
-  function toHome() {
-    navigate("/");
-  }
 
   function showModalHandler() {
     setShowModal(true);
@@ -46,11 +40,11 @@ function Settings() {
     const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/users/update-profile-picture`, {
       method: 'PUT',
       headers: {
-        Authorization: "Bearer " + getAuthToken(),
+        Authorization: 'Bearer ' + getAuthToken(),
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-          profilePicture: profilePicture
+          profilePicture
       })
     })
   }
@@ -59,7 +53,7 @@ function Settings() {
     const response =  await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/users/update-email`, {
       method: 'PUT',
       headers: {
-        Authorization: "Bearer " + getAuthToken(),
+        Authorization: 'Bearer ' + getAuthToken(),
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -81,12 +75,12 @@ function Settings() {
     const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/users/update-password`, {
       method: 'PUT',
       headers: {
-        Authorization: "Bearer " + getAuthToken(),
+        Authorization: 'Bearer ' + getAuthToken(),
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         password: passwordRef.current?.value,
-        passwordConfirm: passwordConfirmRef.current?.value
+        confirmPassword: confirmPasswordRef.current?.value
       })
     })
     const data = await response.json();
@@ -103,9 +97,9 @@ function Settings() {
   useEffect(() => {
     (async function() {
       const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/users/me`, {
-        method: "GET",
+        method: 'GET',
         headers: {
-          Authorization: "Bearer " + getAuthToken(),
+          Authorization: 'Bearer ' + getAuthToken(),
         },
       });
       const data = await response.json();
@@ -114,34 +108,34 @@ function Settings() {
     })();
   }, []);
 
-  pictures.push("https://i.ibb.co/Bg4G0m5/woman1.png")
-  pictures.push("https://i.ibb.co/JzNqyv7/woman2.png")
-  pictures.push("https://i.ibb.co/2g9qyNt/woman3.png")
-  pictures.push("https://i.ibb.co/tsShGjD/woman4.png")
-  pictures.push("https://i.ibb.co/18qpxs6/woman5.png")
-  pictures.push("https://i.ibb.co/SQb81Qk/woman6.png")
-  pictures.push("https://i.ibb.co/4j0fH2X/woman7.png")
-  pictures.push("https://i.ibb.co/8rQcDVd/woman8.png")
-  pictures.push("https://i.ibb.co/s633K4Y/woman9.png")
-  pictures.push("https://i.ibb.co/SsFwpgY/woman10.png")
-  pictures.push("https://i.ibb.co/8cD2yHq/man1.png")
-  pictures.push("https://i.ibb.co/w6LNC43/man2.png")
-  pictures.push("https://i.ibb.co/mhdMdtz/man3.png")
-  pictures.push("https://i.ibb.co/6nnDNMD/man4.png")
-  pictures.push("https://i.ibb.co/N92K8v9/man5.png")
-  pictures.push("https://i.ibb.co/mThDMXb/man6.png")
-  pictures.push("https://i.ibb.co/CKW50DB/man7.png")
-  pictures.push("https://i.ibb.co/x8RZx79/man8.png")
-  pictures.push("https://i.ibb.co/mT3GfQV/man9.png")
-  pictures.push("https://i.ibb.co/58Tcxv7/man10.png")
+  pictures.push('https://i.ibb.co/Bg4G0m5/woman1.png')
+  pictures.push('https://i.ibb.co/JzNqyv7/woman2.png')
+  pictures.push('https://i.ibb.co/2g9qyNt/woman3.png')
+  pictures.push('https://i.ibb.co/tsShGjD/woman4.png')
+  pictures.push('https://i.ibb.co/18qpxs6/woman5.png')
+  pictures.push('https://i.ibb.co/SQb81Qk/woman6.png')
+  pictures.push('https://i.ibb.co/4j0fH2X/woman7.png')
+  pictures.push('https://i.ibb.co/8rQcDVd/woman8.png')
+  pictures.push('https://i.ibb.co/s633K4Y/woman9.png')
+  pictures.push('https://i.ibb.co/SsFwpgY/woman10.png')
+  pictures.push('https://i.ibb.co/8cD2yHq/man1.png')
+  pictures.push('https://i.ibb.co/w6LNC43/man2.png')
+  pictures.push('https://i.ibb.co/mhdMdtz/man3.png')
+  pictures.push('https://i.ibb.co/6nnDNMD/man4.png')
+  pictures.push('https://i.ibb.co/N92K8v9/man5.png')
+  pictures.push('https://i.ibb.co/mThDMXb/man6.png')
+  pictures.push('https://i.ibb.co/CKW50DB/man7.png')
+  pictures.push('https://i.ibb.co/x8RZx79/man8.png')
+  pictures.push('https://i.ibb.co/mT3GfQV/man9.png')
+  pictures.push('https://i.ibb.co/58Tcxv7/man10.png')
 
   return (
     <div className={styles.container}>
-      <img src={backIcon} className={styles.icon} onClick={toHome}></img>
-      <div className={styles["element-container"]}>
+      <FontAwesomeIcon icon={faArrowLeft} className={styles.icon} onClick={() => navigate('/')}/>
+      <div className={styles['element-container']}>
         <h2>Profile Picture</h2>
-        <div className={styles["input-container"]}>
-          <div className={styles["image-container"]}>
+        <div className={styles['input-container']}>
+          <div className={styles['image-container']}>
             {pictures.map((image, index) =>
               <div className={styles['image-wrapper']} onClick={profilePictureClick}>
                 {profilePicture == image && <FontAwesomeIcon icon={faCheck} className={styles.marker}/>}
@@ -154,31 +148,31 @@ function Settings() {
           </ButtonContainer>
         </div>
       </div>
-      <div className={styles["element-container"]}>
+      <div className={styles['element-container']}>
         <h2>Email</h2>
-        <div className={styles["input-container"]}>
-          <input type="email" placeholder={user?.email} className={`${styles.input} ${emailError.length > 0 && styles['error-border']}`} ref={emailRef}></input>
+        <div className={styles['input-container']}>
+          <input type='email' placeholder={user?.email} className={`${styles.input} ${emailError.length > 0 && styles['error-border']}`} ref={emailRef}></input>
           <p className={styles['error-text']}>{emailError.length > 0 && emailError[0].msg}</p>
           <ButtonContainer>
             <BlueButton onClick={updateEmail}>Save</BlueButton>
           </ButtonContainer>
         </div>
       </div>
-      <div className={styles["element-container"]}>
+      <div className={styles['element-container']}>
         <h2>Password</h2>
-        <div className={styles["input-container"]}>
+        <div className={styles['input-container']}>
           <label>New password</label>
-          <input type="password" placeholder="••••••••" className={`${styles.input} ${passwordError.length > 0 && styles['error-border']}`} ref={passwordRef}></input>
+          <input type='password' placeholder='••••••••' className={`${styles.input} ${passwordError.length > 0 && styles['error-border']}`} ref={passwordRef}></input>
           <label>Confirm password</label>
-          <input type="password" placeholder="••••••••" className={`${styles.input} ${passwordError.length > 0 && styles['error-border']}`} ref={passwordConfirmRef}></input>
+          <input type='password' placeholder='••••••••' className={`${styles.input} ${passwordError.length > 0 && styles['error-border']}`} ref={confirmPasswordRef}></input>
           <p className={styles['error-text']}>{passwordError.length > 0 && passwordError[0].msg}</p>
           <ButtonContainer>
             <BlueButton onClick={updatePassword}>Save</BlueButton>
           </ButtonContainer>
         </div>
       </div>
-      <div className={styles["element-container"]}>
-        <div className={styles["single-item"]}>
+      <div className={styles['element-container']}>
+        <div className={styles['single-item']}>
           <h2>Dark mode</h2>
           <Switch></Switch>
         </div>

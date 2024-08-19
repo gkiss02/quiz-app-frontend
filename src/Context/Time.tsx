@@ -1,5 +1,5 @@
-import { TimeCTX } from "./Context";
-import { useState } from "react";
+import { TimeCTX } from './Context';
+import { useState } from 'react';
 
 const Time: React.FC<({children : React.ReactNode})> = (props) => {
     const [time, setTime] = useState(30);

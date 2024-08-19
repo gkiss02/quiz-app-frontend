@@ -1,7 +1,7 @@
 import styles from './ErrorPage.module.css'
 
 function ErrorPage () {
-    const sadIcon = require("../Images/sadness.png");
+    const sadIcon = require('../Images/sadness.png');
 
     return (
         <div className={styles.container}>

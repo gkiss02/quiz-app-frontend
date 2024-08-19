@@ -1,9 +1,9 @@
 import styles from './QuitModal.module.css';
-import Modal from "../../UI/Modal";
-import BlueButton from "../../UI/BlueButton";
-import RedButton from "../../UI/RedButton";
-import ButtonContainer from "../../UI/ButtonContainer";
-import { useNavigate } from "react-router-dom";
+import Modal from '../../UI/Modal';
+import BlueButton from '../../UI/BlueButton';
+import RedButton from '../../UI/RedButton';
+import ButtonContainer from '../../UI/ButtonContainer';
+import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { TimeCTX } from '../../Context/Context';
 
@@ -12,7 +12,7 @@ const QuitModal:React.FC <({closeModal: () => void})> = (props) => {
     const timeCTX = useContext(TimeCTX);
 
     function backHandler () {
-        navigate("/");
+        navigate('/');
         timeCTX.setTime(30);
     }
 

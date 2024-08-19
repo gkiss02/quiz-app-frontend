@@ -30,9 +30,9 @@ function ResultCard () {
 
     return (
         <div className={styles.container} onClick={clickHandle}>
-            <ResultComponent src={trophyIcon} title="Ranking" number={myRanking.rank}></ResultComponent>
+            <ResultComponent src={trophyIcon} title='Ranking' number={myRanking.rank}></ResultComponent>
             <div className={styles.line}></div>
-            <ResultComponent src={coinIcon} title="Points" number={myRanking.score}></ResultComponent>
+            <ResultComponent src={coinIcon} title='Points' number={myRanking.score}></ResultComponent>
         </div>
     )
 }
