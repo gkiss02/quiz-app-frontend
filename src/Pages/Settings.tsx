@@ -43,7 +43,7 @@ function Settings() {
   }
 
   async function updateProfilePicture() {
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/users/updateProfilePicture`, {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/users/update-profile-picture`, {
       method: 'PUT',
       headers: {
         Authorization: "Bearer " + getAuthToken(),
@@ -56,7 +56,7 @@ function Settings() {
   }
 
   async function updateEmail() {
-    const response =  await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/users/updateEmail`, {
+    const response =  await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/users/update-email`, {
       method: 'PUT',
       headers: {
         Authorization: "Bearer " + getAuthToken(),
@@ -78,7 +78,7 @@ function Settings() {
   }
 
   async function updatePassword() {
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/users/updatePassword`, {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/users/update-password`, {
       method: 'PUT',
       headers: {
         Authorization: "Bearer " + getAuthToken(),

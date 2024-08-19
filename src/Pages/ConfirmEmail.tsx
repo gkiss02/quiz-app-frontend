@@ -10,7 +10,7 @@ function ConfirmEmail() {
         (async function () {
             const token = window.location.search.split('=')[1];
             
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/auth/confirmEmail/${token}`, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/auth/confirm-email/${token}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

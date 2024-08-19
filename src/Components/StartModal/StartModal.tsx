@@ -42,7 +42,7 @@ const StartModal: React.FC <({closeModal: () => void, id: string})> = (props) =>
     }
 
     async function createGame () {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/game/createGame`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/game/create-game`, {
             method: 'POST',
             headers: {
                 'Authorization': 'Bearer ' + getAuthToken(),

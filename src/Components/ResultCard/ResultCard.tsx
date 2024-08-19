@@ -16,7 +16,7 @@ function ResultCard () {
 
     useEffect(() => {
         (async function () {
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/rankings/myRanking`, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/rankings/my-ranking`, {
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + getAuthToken()

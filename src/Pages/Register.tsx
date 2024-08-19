@@ -15,7 +15,7 @@ function Register () {
     const [confirmPassword, setConfirmPassword] = useState<string>();
 
     async function handleRegister() {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/users/createUser`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/users/create-user`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

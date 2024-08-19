@@ -10,7 +10,7 @@ const DeleteModal: React.FC <({closeModal: () => void})> = (props) => {
     const navigate = useNavigate();
 
     async function deleteProfile () {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/users/deleteM`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/users/delete-me`, {
             method: 'DELETE',
             headers: {
                 'Authorization': 'Bearer ' + getAuthToken()
