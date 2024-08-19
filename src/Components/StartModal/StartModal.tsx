@@ -77,7 +77,7 @@ const StartModal: React.FC <({closeModal: () => void, id: string})> = (props) =>
                 arr={['30', '60', '120']} 
                 setter={timeHandler}
             />
-            {questionsCTX.notEnough && 
+            {questionsCTX.notEnough &&
                 <div className={styles['not-enough']}>
                     <p>Unfortunately there are no enough questions in our database yet!</p>
                     <p>Please change the difficulty or the category</p>

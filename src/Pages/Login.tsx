@@ -1,5 +1,4 @@
 import styles from './Login.module.css';
-import { useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import FormContainer from '../UI/FromContainer';
@@ -13,6 +12,7 @@ function Login () {
     const [email, setEmail] = useState<string>();
     const [password, setPassword] = useState<string>();
     const [invalidUser, setInvalidUser] = useState(false);
+    const [rememberMe, setRememberMe] = useState(false);
 
     const navigate = useNavigate();
 
@@ -30,11 +30,19 @@ function Login () {
         const data = await response.json();
         
         if (response.ok) {
-            sessionStorage.setItem('accessToken', data.accessToken);
-            sessionStorage.setItem('refreshToken', data.refreshToken);
-            const expirationDate = new Date();
-            expirationDate.setHours(expirationDate.getHours() + 1);
-            sessionStorage.setItem('expirationDate', expirationDate.toISOString());
+            if (rememberMe) {
+                localStorage.setItem('accessToken', data.accessToken);
+                localStorage.setItem('refreshToken', data.refreshToken);
+                const expirationDate = new Date();
+                expirationDate.setHours(expirationDate.getHours() + 1);
+                localStorage.setItem('expirationDate', expirationDate.toISOString());
+            } else {
+                sessionStorage.setItem('accessToken', data.accessToken);
+                sessionStorage.setItem('refreshToken', data.refreshToken);
+                const expirationDate = new Date();
+                expirationDate.setHours(expirationDate.getHours() + 1);
+                sessionStorage.setItem('expirationDate', expirationDate.toISOString());
+            }
             navigate('/');
         }
 
@@ -67,6 +75,8 @@ function Login () {
             <div className={styles.wrapper}>
                 <div className={styles['remember-me']}>
                 <Checkbox
+                    onChange={() => {setRememberMe(!rememberMe)}}
+                    checked={rememberMe}
                     icon={<BookmarkBorderIcon />}
                     checkedIcon={<BookmarkIcon />}
                     sx={{

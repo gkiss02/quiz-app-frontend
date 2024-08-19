@@ -10,14 +10,21 @@ import Settings from './Pages/Settings';
 import Leaderboard from './Pages/Leaderboard';
 import ErrorPage from './Pages/ErrorPage';
 import Register from './Pages/Register';
-import { checkAuthLoader, tokenLoader } from './Util/auth'; 
+import { checkAuthLoader, refreshToken, tokenLoader } from './Util/auth'; 
 import { logoutAction } from './Util/logoutAction';
 import ConfirmEmail from './Pages/ConfirmEmail';
 import ForgotPassword from './Pages/ForgotPassword';
 import ResetPassword from './Pages/ResetPassword';
+import { useEffect } from 'react';
 
 
 function App() {
+  useEffect (() => {
+    (async function() {
+      await refreshToken()
+    })();
+  }, [])
+
   const router = createBrowserRouter([{
     path: '/',
     id: 'root',

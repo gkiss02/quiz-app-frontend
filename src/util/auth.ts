@@ -1,9 +1,10 @@
 import { redirect } from 'react-router-dom';
 
 export function getTokenDuration() {
-    const storedExpirationDate = sessionStorage.getItem('expirationDate');
+    const storedExpirationDate = sessionStorage.getItem('expirationDate') ? sessionStorage.getItem('expirationDate') : localStorage.getItem('expirationDate');
+
     if (!storedExpirationDate) {
-        return redirect('/errorPage');
+        return redirect('/error-page');
     }
 
     const expirationDate = new Date(storedExpirationDate);
@@ -13,7 +14,7 @@ export function getTokenDuration() {
 }
 
 export function getAuthToken() {
-    const accessToken = sessionStorage.getItem('accessToken');
+    const accessToken = sessionStorage.getItem('accessToken') ? sessionStorage.getItem('accessToken') : localStorage.getItem('accessToken');
 
     const tokenDuration = getTokenDuration();
 
@@ -39,19 +40,24 @@ export function checkAuthLoader() {
     return null;
 }
 
-setInterval( async() => {
-    sessionStorage.getItem('refreshToken');
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/refresh`, {
+setInterval(async() => {
+    await refreshToken();
+} , 60 * 45 * 1000);
+
+export const refreshToken = async () => {
+    const refreshToken = sessionStorage.getItem('refreshToken') ? sessionStorage.getItem('refreshToken') : localStorage.getItem('refreshToken');
+
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/auth/refresh`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            refreshToken: sessionStorage.getItem('refreshToken'),
+            refreshToken
         }),
     });
 
     const data = await response.json();
-    sessionStorage.setItem('accessToken', data.accessToken);
-    sessionStorage.setItem('expirationDate', data.expirationDate);
-} , 30 * 60 * 1000);
+    sessionStorage.getItem('refreshToken') ? sessionStorage.setItem('refreshToken', data.accessToken) : sessionStorage.setItem('refreshToken', data.accessToken) ;
+    sessionStorage.getItem('expirationDate') ? sessionStorage.setItem('expirationDate', data.expirationDate) : sessionStorage.setItem('expirationDate', data.expirationDate);
+}
