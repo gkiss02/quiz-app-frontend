@@ -21,7 +21,7 @@ import { useEffect } from 'react';
 function App() {
   useEffect (() => {
     (async function() {
-      await refreshToken()
+      await refreshToken();
     })();
   }, [])
 

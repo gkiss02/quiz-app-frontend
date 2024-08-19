@@ -13,23 +13,36 @@ function Login () {
     const [password, setPassword] = useState<string>();
     const [invalidUser, setInvalidUser] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string>();
 
     const navigate = useNavigate();
 
     async function handleLogin() {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/auth/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email,
-                password
+        setLoading(true);
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/auth/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email,
+                    password
+                })
             })
-        })
-        const data = await response.json();
-        
-        if (response.ok) {
+            const data = await response.json();
+
+            if (!response.ok) {
+                navigate('/error-page');
+            }
+
+            if (response.status === 401) {
+                setInvalidUser(true);
+                setError(data.message);
+            }
+
+
             if (rememberMe) {
                 localStorage.setItem('accessToken', data.accessToken);
                 localStorage.setItem('refreshToken', data.refreshToken);
@@ -43,11 +56,14 @@ function Login () {
                 expirationDate.setHours(expirationDate.getHours() + 1);
                 sessionStorage.setItem('expirationDate', expirationDate.toISOString());
             }
-            navigate('/');
-        }
 
-        if (response.status === 401) {
-            setInvalidUser(true);
+            navigate('/');
+            setLoading(false);
+            
+        } catch (error) {
+            navigate('/error-page');
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -62,7 +78,6 @@ function Login () {
                     type='email' 
                     placeholder='Email' 
                     isValid={invalidUser}
-                    errorMessage=''
                     setValue={setEmail}
                 />
                 <Input 
@@ -70,6 +85,7 @@ function Login () {
                     placeholder='Password' 
                     isValid={invalidUser}
                     setValue={setPassword}
+                    errorMessage={error}
                 />
             </div>
             <div className={styles.wrapper}>
@@ -91,7 +107,7 @@ function Login () {
                 </div>
                 <Link to='/forgot-password'>Forgot password?</Link>
             </div>
-            <BlueButton onClick={handleLogin} isBig={true}>Login</BlueButton>
+            <BlueButton onClick={handleLogin} isBig={true}>{loading ? 'Login...' : 'Login'}</BlueButton>
             <div>
                 <p>Don't have an account?<br></br>
                 <span className={styles['register-link']}><Link to='/register'>Register</Link></span></p>
