@@ -6,8 +6,6 @@ import { getAuthToken } from '../../Util/auth'
 import { ErrorCTX } from '../../Context/Context'
 
 function ResultCard () {
-    const trophyIcon = require('../../Images/trophy.png')
-    const coinIcon = require('../../Images/coin.png')
     const navigate = useNavigate()
     const [myRanking, setMyRanking] = useState(Object);
     const errorToasterState = useContext(ErrorCTX);
@@ -41,9 +39,9 @@ function ResultCard () {
 
     return (
         <div className={styles.container} onClick={clickHandle}>
-            <ResultComponent src={trophyIcon} title='Ranking' number={myRanking.rank}></ResultComponent>
+            <ResultComponent src="https://i.ibb.co/9T26kHw/trophy.png" title='Ranking' number={myRanking.rank} />
             <div className={styles.line}></div>
-            <ResultComponent src={coinIcon} title='Points' number={myRanking.score}></ResultComponent>
+            <ResultComponent src="https://i.ibb.co/Q6WzXFz/coin.png" title='Points' number={myRanking.score}/>
         </div>
     )
 }

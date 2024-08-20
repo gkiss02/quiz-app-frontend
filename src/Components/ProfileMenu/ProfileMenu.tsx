@@ -3,9 +3,6 @@ import { useNavigate, useSubmit } from 'react-router-dom';
 
 function ProfileMenu () {
     const submit = useSubmit();
-
-    const settingsIcon  = require('../../Images/settings.png')
-    const logoutIcon = require('../../Images/check-out.png')
     const navigate = useNavigate();
 
     function toSettings () {
@@ -19,11 +16,11 @@ function ProfileMenu () {
     return (
         <div className={styles.container}>
             <div className={styles.item}  onClick={toSettings}>
-                <img src={settingsIcon} className={styles.icon}></img>
+                <img src="https://i.ibb.co/GHJL13X/settings.png" className={styles.icon} />
                 <p>Settings</p>
             </div>
             <div className={styles.item} onClick={logout}>
-                <img src={logoutIcon} className={styles.icon}></img>
+                <img src="https://i.ibb.co/D5C6yTQ/check-out.png" className={styles.icon} />
                 <p>Logout</p>
             </div>
         </div>

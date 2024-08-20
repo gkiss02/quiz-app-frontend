@@ -19,19 +19,6 @@ function Main () {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
 
-    const musicIcon = require('../Images/001-musical-notes.png');
-    const animalsIcon = require('../Images/002-giraffe.png');
-    const mathIcon = require('../Images/003-calculator.png');
-    const sportsIcon = require('../Images/004-basketball.png');
-    const historyIcon = require('../Images/005-parchment.png');
-    const movieIcon = require('../Images/006-film-slate.png');
-    const geographyIcon = require('../Images/007-globe.png');
-    const celebrityIcon = require('../Images/008-fame.png');
-    const mythologyIcon = require('../Images/009-trident.png');
-    const politicsIcon = require('../Images/010-democracy.png');
-    const booksIcon = require('../Images/book.png');
-    const scienceIcon = require('../Images/science.png');
-
     function showModal () {
         setVisible(true);
     }
@@ -69,6 +56,7 @@ function Main () {
     if (loading) {
         return <Loader />
     }
+    
     return (
         <div className={styles.container}>
             <header className={styles.header}>
@@ -77,29 +65,29 @@ function Main () {
                     <p className={styles['welcome-text']}>Let's make this day productive</p>
                 </div>
                 <div className={styles['profile-container']}>
-                    {profileMenu && <ProfileMenu></ProfileMenu>}
-                    <img src={user?.profilePicture} className={styles['profile-picture']} onClick={profileMenuHandler}></img>
+                    {profileMenu && <ProfileMenu />}
+                    <img src={user?.profilePicture} className={styles['profile-picture']} onClick={profileMenuHandler} />
                 </div>
             </header>
-            <ResultCard></ResultCard>
+            <ResultCard />
             <div>
                 <h3>Let's play</h3>
                 <div className={styles['category-container']}>
-                    <CategoryCard id={'21'} src={sportsIcon} name={'Sports'} showModal={showModal} setId={setId}></CategoryCard>
-                    <CategoryCard id={'23'} src={historyIcon} name={'History'} showModal={showModal} setId={setId}></CategoryCard>
-                    <CategoryCard id={'11'} src={movieIcon} name={'Movies'} showModal={showModal} setId={setId}></CategoryCard>
-                    <CategoryCard id={'22'} src={geographyIcon} name={'Geography'} showModal={showModal} setId={setId}></CategoryCard>
-                    <CategoryCard id={'26'} src={celebrityIcon} name={'Celebrities'} showModal={showModal} setId={setId}></CategoryCard>
-                    <CategoryCard id={'20'} src={mythologyIcon} name={'Mythology'} showModal={showModal} setId={setId}></CategoryCard>
-                    <CategoryCard id={'24'} src={politicsIcon} name={'Politics'} showModal={showModal} setId={setId}></CategoryCard>
-                    <CategoryCard id={'10'} src={booksIcon} name={'Books'} showModal={showModal} setId={setId}></CategoryCard>
-                    <CategoryCard id={'17'} src={scienceIcon} name={'Science'} showModal={showModal} setId={setId}></CategoryCard>
-                    <CategoryCard id={'12'} src={musicIcon} name={'Music'} showModal={showModal} setId={setId}></CategoryCard>
-                    <CategoryCard id={'27'} src={animalsIcon} name={'Animals'} showModal={showModal} setId={setId}></CategoryCard>
-                    <CategoryCard id={'19'} src={mathIcon} name={'Math'} showModal={showModal} setId={setId}></CategoryCard>
+                    <CategoryCard id={'21'} src='https://i.ibb.co/ctLdW03/004-basketball.png' name={'Sports'} showModal={showModal} setId={setId} />
+                    <CategoryCard id={'23'} src='https://i.ibb.co/4JcgXFD/005-parchment.png' name={'History'} showModal={showModal} setId={setId} />
+                    <CategoryCard id={'11'} src='https://i.ibb.co/b7HdQkh/006-film-slate.png' name={'Movies'} showModal={showModal} setId={setId} />
+                    <CategoryCard id={'22'} src='https://i.ibb.co/HzRMY0y/007-globe.png' name={'Geography'} showModal={showModal} setId={setId} />
+                    <CategoryCard id={'26'} src='https://i.ibb.co/Qbn2mG9/008-fame.png' name={'Celebrities'} showModal={showModal} setId={setId} />
+                    <CategoryCard id={'20'} src='https://i.ibb.co/cTsvDmL/009-trident.png' name={'Mythology'} showModal={showModal} setId={setId} />
+                    <CategoryCard id={'24'} src='https://i.ibb.co/FBTZW2F/010-democracy.png' name={'Politics'} showModal={showModal} setId={setId} />
+                    <CategoryCard id={'10'} src='https://i.ibb.co/c3SjfSn/book.png' name={'Books'} showModal={showModal} setId={setId} />
+                    <CategoryCard id={'17'} src='https://i.ibb.co/dW9v5qz/science.png' name={'Science'} showModal={showModal} setId={setId} />
+                    <CategoryCard id={'12'} src='https://i.ibb.co/WkJb7kV/001-musical-notes.png' name={'Music'} showModal={showModal} setId={setId} />
+                    <CategoryCard id={'27'} src='https://i.ibb.co/T1NbCVM/002-giraffe.png' name={'Animals'} showModal={showModal} setId={setId} />
+                    <CategoryCard id={'19'} src='https://i.ibb.co/dcF88rX/003-calculator.png' name={'Math'} showModal={showModal} setId={setId} />
                 </div>
             </div>
-            {visible && <Modal closeModal={closeModal} id={id}></Modal>}
+            {visible && <Modal closeModal={closeModal} id={id} />}
         </div>
     )}
 

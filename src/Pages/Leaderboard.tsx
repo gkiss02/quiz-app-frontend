@@ -7,19 +7,14 @@ import { useEffect, useState } from 'react';
 import { getAuthToken } from '../Util/auth';
 import { UserWithScore } from '../Types/UserWithScore';
 import { CircularProgress } from '@mui/material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 function Leaderboard () {
     const navigate = useNavigate();
     const [selected, setSelected] = useState('allTime')
     const [users, setUsers] = useState<UserWithScore[]>([])
     const [loading, setLoading] = useState(false);
-
-    const backIcon = require('../Images/back-white.png')
-    const crownIcon = require('../Images/crown.png')
-
-    function toHome () {
-        navigate('/')
-    }
 
     useEffect(() => {
         (async function () {
@@ -58,13 +53,13 @@ function Leaderboard () {
                 <div className={styles['helper-container']}>
                     <div className={styles['header-container']}>
                         <div className={styles['icon-container']}>
-                            <img src={backIcon} className={styles.icon} onClick={toHome}></img>
+                            <FontAwesomeIcon icon={faArrowLeft} className={styles.icon} onClick={() => navigate('/')}/>
                         </div>
                         <h1 className={styles.title}>Leaderboard</h1>
                     </div>
                     <div className={styles.wrapper}>
                         <LeaderboardSelector selected={setSelected} />
-                        <img src={crownIcon} className={styles.crown}></img>
+                        <img src='https://i.ibb.co/LNZyVfy/crown.png' className={styles.crown}></img>
                         <div className={styles['winners-container']}>
                             <Winners src={users[1]?.profilePicture} result='2' name={users[1]?.name} score={users[1]?.score} />
                             <Winners src={users[0]?.profilePicture} result='1' name={users[0]?.name} score={users[0]?.score} />
