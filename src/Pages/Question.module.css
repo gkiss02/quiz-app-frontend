@@ -23,6 +23,11 @@
 .timer-container {
     margin: 3rem auto -5rem;
     width: fit-content;
+    background-color: white;
+    z-index: 1;
+    position: relative;
+    border-radius: 360px;
+    padding: .3rem;
 }
 
 .question-container {
@@ -37,4 +42,9 @@
 .text {
     width: 60%;
     text-align: center;
+}
+
+.timer-text {
+    font-size: 2rem;
+    color: var(--text-grey)
 }

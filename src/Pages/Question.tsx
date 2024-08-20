@@ -2,7 +2,6 @@ import FilledBar from '../Components/FilledBar/FilledBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faX } from '@fortawesome/free-solid-svg-icons'
 import styles from './Question.module.css';
-import Timer from '../Components/Timer/Timer';
 import Answer from '../Components/Answer/Answer';
 import { useState, useContext, useEffect } from 'react';
 import { QuestionsCTX, TimeCTX } from '../Context/Context';
@@ -12,6 +11,7 @@ import BlueButton from '../UI/BlueButton';
 import QuitModal from '../Components/QuitModal/QuitModal';
 import EmptyModal from '../Components/EmptyModal/EmptyModal';
 import ButtonContainer from '../UI/ButtonContainer';
+import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 
 function Question () {
     const questionsCTX = useContext(QuestionsCTX);
@@ -72,17 +72,28 @@ function Question () {
     }, [counter, isChecked]);
 
     useEffect(() => {
-        if (questionCounter === questionsCTX.questions.length - 1) setLast(true);
+        if (questionCounter === questionsCTX.questions.length - 1) {
+            setLast(true);
+        }
     }, [questionCounter, questionsCTX.questions.length]);
     
     return (
         <div className={styles.container}>
             <div className={styles['bar-container']}>
                 <FontAwesomeIcon icon={faX} className={styles['x-icon']} onClick={quitModalHandler}/>
-                <FilledBar numberOfQuestions={questionsCTX.questions.length} actual={questionCounter + 1}></FilledBar>
+                <FilledBar numberOfQuestions={questionsCTX.questions.length} actual={questionCounter + 1} />
             </div>
             <div className={styles['timer-container']}>
-                <Timer time={counter}></Timer>
+                <CountdownCircleTimer
+                    key={questionCounter}
+                    isPlaying={!isChecked}
+                    duration={timeCTX.time}
+                    size={100}
+                    colors="#3EB8D4"
+                    strokeWidth={10}
+                >
+                    {({ remainingTime }) => <p className={styles['timer-text']}>{remainingTime}</p>}
+                </CountdownCircleTimer>
             </div>
             <div className={styles['question-container']}>
                 <h2 className={styles.text}>{actualQuestion.question}</h2>
@@ -107,9 +118,9 @@ function Question () {
                     {isChecked ? 'Next' : 'Check'}
                 </BlueButton>}
             </ButtonContainer>
-            {timeOutModal && <TimeOutModal nextHandle={last ? finishHandler : nextHandler}></TimeOutModal>}
-            {quitModal && <QuitModal closeModal={quitModalHandler}></QuitModal>}
-            {emptyModal && <EmptyModal closeModal={emptyModalHandler}></EmptyModal>}
+            {timeOutModal && <TimeOutModal nextHandle={last ? finishHandler : nextHandler} />}
+            {quitModal && <QuitModal closeModal={quitModalHandler} />}
+            {emptyModal && <EmptyModal closeModal={emptyModalHandler} />}
         </div>
     )
 }
