@@ -1,10 +1,11 @@
 import styles from './Register.module.css';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { BackendError } from '../Types/BackendError';
 import FormContainer from '../UI/FromContainer';
 import Input from '../Components/Input/Input';
 import BlueButton from '../UI/BlueButton';
+import { ErrorCTX, SuccessCTX } from '../Context/Context';
 
 function Register () {
     const [errors, setErrors] = useState<BackendError[]>([]);
@@ -13,32 +14,41 @@ function Register () {
     const [email, setEmail] = useState<string>();
     const [password, setPassword] = useState<string>();
     const [confirmPassword, setConfirmPassword] = useState<string>();
+    const errorToasterState = useContext(ErrorCTX);
+    const successToasterState = useContext(SuccessCTX);
 
     async function handleRegister() {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/users/create-user`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name,
-                email,
-                password,
-                confirmPassword,
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/users/create-user`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    password,
+                    confirmPassword,
+                })
             })
-        })
-        const data = await response.json();
+            const data = await response.json();
 
-        if (response.status === 400) {
-            let arr: BackendError[] = [];
-            data.errors.forEach((error: BackendError) => {
-                arr.push(error);
-            })
-            setErrors(arr);
-        }
+            if (response.status === 400) {
+                let arr: BackendError[] = [];
+                data.errors.forEach((error: BackendError) => {
+                    arr.push(error);
+                })
+                setErrors(arr);
+            }
 
-        if (response.ok) {
-            navigate('/');
+            if (response.ok) {
+                navigate('/');
+            }
+
+            successToasterState.setSuccess(true);
+            successToasterState.setMessage('Account created successfully. Please confirm your email address to login.');
+        } catch (error) {
+            errorToasterState.setError(true);
         }
     }
     

@@ -29,6 +29,7 @@ function Settings() {
   const [emailSaving, setEmailSaving] = useState(false);
   const [passwordSaving, setPasswordSaving] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState<string>();
 
   const pictures = ['https://i.ibb.co/Bg4G0m5/woman1.png', 'https://i.ibb.co/JzNqyv7/woman2.png', 'https://i.ibb.co/2g9qyNt/woman3.png', 
     'https://i.ibb.co/tsShGjD/woman4.png', 'https://i.ibb.co/18qpxs6/woman5.png', 'https://i.ibb.co/SQb81Qk/woman6.png', 'https://i.ibb.co/4j0fH2X/woman7.png', 
@@ -99,6 +100,7 @@ function Settings() {
       }
       successToasterState.setSuccess(true);
       successToasterState.setMessage('Email updated successfully');
+      setEmail(emailRef.current?.value);
       emailRef.current!.value = '';
 
     } catch (error) {
@@ -160,6 +162,7 @@ function Settings() {
         const data = await response.json();
         setUser(data);
         setProfilePicture(data.profilePicture);
+        setEmail(data.email);
 
       } catch (error) {
         navigate('/error-page');
@@ -195,7 +198,7 @@ function Settings() {
       <div className={styles['element-container']}>
         <h2>Email</h2>
         <div className={styles['input-container']}>
-          <input type='email' placeholder={user?.email} className={`${styles.input} ${emailError.length > 0 && styles['error-border']}`} ref={emailRef}></input>
+          <input type='email' placeholder={email} className={`${styles.input} ${emailError.length > 0 && styles['error-border']}`} ref={emailRef}></input>
           <p className={styles['error-text']}>{emailError.length > 0 && emailError[0].msg}</p>
           <ButtonContainer>
             <BlueButton onClick={updateEmail}>{emailSaving ? 'Saving...' : 'Save'}</BlueButton>
