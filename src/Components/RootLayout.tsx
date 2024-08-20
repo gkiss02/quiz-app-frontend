@@ -11,6 +11,10 @@ function RootLayout () {
         return;
       }
 
+      if (localStorage.getItem('accessToken') !== null) {
+        return;
+      }
+
       if (accessToken === 'EXPIRED') {
         submit(null, { action: '/logout', method: 'post' });
         return;

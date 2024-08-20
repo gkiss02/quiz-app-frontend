@@ -40,13 +40,11 @@ function Register () {
                 })
                 setErrors(arr);
             }
-
-            if (response.ok) {
-                navigate('/');
-            }
-
+            
             successToasterState.setSuccess(true);
-            successToasterState.setMessage('Account created successfully. Please confirm your email address to login.');
+            successToasterState.setMessage('Account created successfully. Please check your email inbox, including the spam folder, for a confirmation email.');
+            
+            navigate('/');
         } catch (error) {
             errorToasterState.setError(true);
         }
