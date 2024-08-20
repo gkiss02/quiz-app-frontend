@@ -5,8 +5,8 @@ const Time: React.FC<({children : React.ReactNode})> = (props) => {
     const [time, setTime] = useState(30);
 
     const obj = {
-        time: time,
-        setTime: setTime
+        time,
+        setTime
     }
 
     return (

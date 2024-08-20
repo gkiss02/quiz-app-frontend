@@ -1,18 +1,23 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Input from '../Components/Input/Input';
 import FormContainer from '../UI/FromContainer';
 import styles from './ResetPassword.module.css';
 import BlueButton from '../UI/BlueButton';
 import { BackendError } from '../Types/BackendError';
 import { useNavigate } from 'react-router-dom';
+import { ErrorCTX, SuccessCTX } from '../Context/Context';
+import SuccessToasterState from '../Context/SuccessToasterState';
 
 function ResetPassword() {
     const [password, setPassword] = useState<string>();
     const [confirmPassword, setConfirmPassword] = useState<string>();
     const [passwordError, setPasswordError] = useState<BackendError[]>();
     const navigate = useNavigate();
+    const errorToasterState = useContext(ErrorCTX);
+    const SuccessToasterState = useContext(SuccessCTX);
 
     async function resetPassword() {
+        try {
         const token = window.location.search.split('=')[1];
 
         const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/auth/reset-password/${token}`, {
@@ -28,6 +33,10 @@ function ResetPassword() {
 
         const data = await response.json();
 
+        if (data.error) {
+            throw new Error(data.error);
+        }
+
         if (response.status === 400) {
             let arr: BackendError[] = [];
             data.errors.forEach((error: BackendError) => {
@@ -35,8 +44,13 @@ function ResetPassword() {
             })
             setPasswordError(arr);
         }
-    
+
+        SuccessToasterState.setSuccess(true);
+        SuccessToasterState.setMessage('Password reset successfully');
         navigate('/')
+        } catch (error) {
+            errorToasterState.setError(true);
+        }
     }
 
     return (

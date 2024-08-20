@@ -1,12 +1,13 @@
 import styles from './Login.module.css';
-import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { Link, redirect, useNavigate } from 'react-router-dom';
+import { useContext, useState } from 'react';
 import FormContainer from '../UI/FromContainer';
 import BlueButton from '../UI/BlueButton';
 import Input from '../Components/Input/Input';
-import { Checkbox } from '@mui/material';
+import { Checkbox, SnackbarCloseReason } from '@mui/material';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
+import { ErrorCTX } from '../Context/Context';
 
 function Login () {
     const [email, setEmail] = useState<string>();
@@ -15,6 +16,7 @@ function Login () {
     const [rememberMe, setRememberMe] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string>();
+    const errorToasterState = useContext(ErrorCTX);
 
     const navigate = useNavigate();
 
@@ -33,15 +35,17 @@ function Login () {
             })
             const data = await response.json();
 
-            if (!response.ok) {
-                navigate('/error-page');
-            }
-
             if (response.status === 401) {
                 setInvalidUser(true);
                 setError(data.message);
+                return;
             }
 
+            if (!response.ok) {
+                errorToasterState.setError(true);
+                setLoading(false);
+                return;
+            }
 
             if (rememberMe) {
                 localStorage.setItem('accessToken', data.accessToken);
@@ -61,7 +65,7 @@ function Login () {
             setLoading(false);
             
         } catch (error) {
-            navigate('/error-page');
+            errorToasterState.setError(true);
         } finally {
             setLoading(false);
         }

@@ -2,13 +2,14 @@ import styles from './Result.module.css'
 import { useNavigate } from 'react-router-dom';
 import BlueButton from '../UI/BlueButton';
 import { useContext, useEffect, useState } from 'react';
-import { TimeCTX } from '../Context/Context';
+import { ErrorCTX, TimeCTX } from '../Context/Context';
 import { getAuthToken } from '../Util/auth';
 
 function Result () {
     const navigate = useNavigate();
     const timeCTX = useContext(TimeCTX);
     const [latestGame, setLatestGame] = useState(Object);
+    const errorToastersState = useContext(ErrorCTX);
 
     function backHandler () {
         navigate('/');
@@ -17,14 +18,18 @@ function Result () {
 
     useEffect(() => {
         (async function () {
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/game/get-latest-game-score`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + getAuthToken(),
-                }
-            })
-            const data = await response.json();
-            setLatestGame(data);
+            try {
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/game/get-latest-game-score`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + getAuthToken(),
+                    }
+                })
+                const data = await response.json();
+                setLatestGame(data);
+            } catch (error) {
+                errorToastersState.setError(true);
+            }
         })();
     }, [])
 

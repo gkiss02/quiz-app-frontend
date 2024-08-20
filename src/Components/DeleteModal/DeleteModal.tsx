@@ -5,19 +5,32 @@ import RedButton from '../../UI/RedButton';
 import styles from './DeleteModal.module.css';
 import { getAuthToken } from '../../Util/auth';
 import { useSubmit } from 'react-router-dom';
+import { useContext } from 'react';
+import { ErrorCTX, SuccessCTX } from '../../Context/Context';
 
 const DeleteModal: React.FC <({closeModal: () => void})> = (props) => {
     const submit = useSubmit();
+    const errorToasterState = useContext(ErrorCTX);
+    const successToasterState = useContext(SuccessCTX);
+    
     async function deleteProfile () {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/users/delete-me`, {
-            method: 'DELETE',
-            headers: {
-                'Authorization': 'Bearer ' + getAuthToken()
-            }
-        })
-        
-        if (response.ok) {
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/users/delete-me`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': 'Bearer ' + getAuthToken()
+                }
+            })
+
+            if (!response.ok) {
+                throw new Error('Something went wrong');
+            }   
+            
+            successToasterState.setSuccess(true);
+            successToasterState.setMessage('Profile deleted successfully');
             submit(null, { action: '/logout', method: 'post' });
+        } catch (error) {
+            errorToasterState.setError(true);
         }
     }
 

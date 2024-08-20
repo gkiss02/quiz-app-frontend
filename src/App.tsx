@@ -16,6 +16,10 @@ import ConfirmEmail from './Pages/ConfirmEmail';
 import ForgotPassword from './Pages/ForgotPassword';
 import ResetPassword from './Pages/ResetPassword';
 import { useEffect } from 'react';
+import ErrorToasterState from './Context/ErrorToasterState';
+import SuccessToasterState from './Context/SuccessToasterState';
+import ErrorToaster from './Components/Toasters/ErrorToaster';
+import SuccessToaster from './Components/Toasters/SuccessToaster';
 
 
 function App() {
@@ -49,7 +53,13 @@ function App() {
   return (
     <Questions>
       <Time>
-        <RouterProvider router={router}></RouterProvider>
+        <ErrorToasterState>
+          <SuccessToasterState>
+            <SuccessToaster />
+            <ErrorToaster />
+            <RouterProvider router={router}></RouterProvider>
+          </SuccessToasterState>
+        </ErrorToasterState>
       </Time>
     </Questions>
   );

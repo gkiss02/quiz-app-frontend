@@ -2,8 +2,11 @@ import styles from './Answer.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { getAuthToken } from '../../Util/auth';
+import Toaster from '../../UI/Toaster';
+import { useNavigate } from 'react-router-dom';
+import { ErrorCTX } from '../../Context/Context';
 
 type AnswerProps = {
     answer: string,
@@ -16,13 +19,26 @@ type AnswerProps = {
 }
 
 const Answer: React.FC <AnswerProps> = (props) => {
+    const navigate = useNavigate();
+    const errorToasterState = useContext(ErrorCTX);
+
     async function increaseScore () {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/game/increase-score`, {
-            method: 'PUT',
-            headers: {
-                'Authorization': 'Bearer ' + getAuthToken(),
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/game/increase-score`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': 'Bearer ' + getAuthToken(),
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Something went wrong');
             }
-        });
+
+        } catch (error) {
+            errorToasterState.setError(true);
+            navigate('/');
+        }
     }
 
     useEffect(() => {

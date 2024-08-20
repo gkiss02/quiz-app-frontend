@@ -7,6 +7,8 @@ import { useState, useContext, useEffect } from 'react';
 import { QuestionsCTX } from '../Context/Context';
 import { getAuthToken } from '../Util/auth';
 import { User } from '../Types/User';
+import { useNavigate } from 'react-router-dom';
+import Loader from '../UI/Loader';
 
 function Main () {
     const [visible, setVisible] = useState(false);
@@ -14,6 +16,8 @@ function Main () {
     const [id, setId] = useState('0');
     const [user, setUser] = useState<User>();
     const setNotEnough = useContext(QuestionsCTX).setNotEnough;
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
 
     const musicIcon = require('../Images/001-musical-notes.png');
     const animalsIcon = require('../Images/002-giraffe.png');
@@ -43,18 +47,28 @@ function Main () {
 
     useEffect(() => {
         (async function () {
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/users/me`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + getAuthToken()
-                }
-            })
+            setLoading(true);
+            try {
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/users/me`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + getAuthToken()
+                    }
+                })
 
-            const data = await response.json();
-            setUser(data);
+                const data = await response.json();
+                setUser(data);
+            } catch (error) {
+                navigate('/error-page');
+            } finally {
+                setLoading(false);
+            }
         }())
     }, []);
 
+    if (loading) {
+        return <Loader />
+    }
     return (
         <div className={styles.container}>
             <header className={styles.header}>

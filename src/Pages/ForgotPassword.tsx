@@ -1,15 +1,18 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Input from '../Components/Input/Input';
 import FormContainer from '../UI/FromContainer';
 import BlueButton from '../UI/BlueButton';
 import styles from './ForgotPassword.module.css';
 import { useNavigate } from 'react-router-dom';
+import { ErrorCTX } from '../Context/Context';
 
 function ForgotPassword() {
     const [email, setEmail] = useState<string>();
     const navigate = useNavigate();
+    const errorToasterState = useContext(ErrorCTX);
 
     async function sendEmail() {
+        try {
         const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/auth/forgot-password`, {
             method: 'POST',
             headers: {
@@ -20,7 +23,16 @@ function ForgotPassword() {
             })
         })
         const data = await response.json();
+
+        if (data.error) {
+            throw new Error(data.error);
+        }
+        
         navigate('/');
+
+        } catch (error) {
+            errorToasterState.setError(true);
+        }
     }
 
     return (

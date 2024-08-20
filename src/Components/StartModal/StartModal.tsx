@@ -1,7 +1,7 @@
 import Modal from '../../UI/Modal'
 import Select from '../Select/Select'
 import { useState, useContext } from 'react'
-import { QuestionsCTX, TimeCTX } from '../../Context/Context'
+import { ErrorCTX, QuestionsCTX, TimeCTX } from '../../Context/Context'
 import { useNavigate } from 'react-router-dom'
 import BlueButton from '../../UI/BlueButton'
 import RedButton from '../../UI/RedButton'
@@ -16,6 +16,7 @@ const StartModal: React.FC <({closeModal: () => void, id: string})> = (props) =>
     const timeCTX = useContext(TimeCTX);
     const questionsCTX = useContext(QuestionsCTX);
     const navigate = useNavigate();
+    const errorToasterState = useContext(ErrorCTX);
 
     function difficultyHandler (element: string) {
         setDifficulty(element);
@@ -42,17 +43,26 @@ const StartModal: React.FC <({closeModal: () => void, id: string})> = (props) =>
     }
 
     async function createGame () {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/game/create-game`, {
-            method: 'POST',
-            headers: {
-                'Authorization': 'Bearer ' + getAuthToken(),
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                difficulty: difficultyNumber,
-                numberOfQuestions: numberOfQuestions,
-            })
-        });
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/game/create-game`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + getAuthToken(),
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    difficulty: difficultyNumber,
+                    numberOfQuestions: numberOfQuestions,
+                })
+            });
+            const data = await response.json();
+
+            if (data.error) {
+                throw new Error(data.error);
+            }
+        } catch (error) {
+            errorToasterState.setError(true);
+        }
     }
 
     if (questionsCTX.ready) {

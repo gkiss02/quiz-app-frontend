@@ -14,3 +14,15 @@ export const TimeCTX = createContext({
     time: 30,
     setTime: (time: number) => {},
 });
+
+export const ErrorCTX = createContext({
+    error: false,
+    setError: (error: boolean) => {},
+});
+
+export const SuccessCTX = createContext({
+    success: false,
+    setSuccess: (success: boolean) => {},
+    message: '',
+    setMessage: (message: string) => {},
+});
