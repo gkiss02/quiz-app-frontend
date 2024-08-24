@@ -3,7 +3,7 @@ import ButtonContainer from '../../UI/ButtonContainer';
 import Modal from '../../UI/Modal';
 import RedButton from '../../UI/RedButton';
 import styles from './DeleteModal.module.css';
-import { getAuthToken } from '../../Util/auth';
+import { getAuthToken } from '../../util/auth';
 import { useSubmit } from 'react-router-dom';
 import { useContext } from 'react';
 import { ErrorCTX, SuccessCTX } from '../../Context/Context';

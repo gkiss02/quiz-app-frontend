@@ -5,7 +5,7 @@ import Modal from '../Components/StartModal/StartModal';
 import ProfileMenu from '../Components/ProfileMenu/ProfileMenu'
 import { useState, useContext, useEffect } from 'react';
 import { QuestionsCTX } from '../Context/Context';
-import { getAuthToken } from '../Util/auth';
+import { getAuthToken } from '../util/auth';
 import { User } from '../Types/User';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../UI/Loader';

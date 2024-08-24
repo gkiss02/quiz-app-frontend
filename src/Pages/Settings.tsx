@@ -4,7 +4,7 @@ import ButtonContainer from '../UI/ButtonContainer';
 import Switch from '@mui/material/Switch';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef, useContext } from 'react';
-import { getAuthToken } from '../Util/auth';
+import { getAuthToken } from '../util/auth';
 import { User } from '../Types/User';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faCheck } from '@fortawesome/free-solid-svg-icons';

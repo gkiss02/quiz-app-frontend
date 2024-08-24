@@ -2,7 +2,7 @@ import styles from './ResultCard.module.css'
 import ResultComponent from './ResultComponent'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect, useContext } from 'react'
-import { getAuthToken } from '../../Util/auth'
+import { getAuthToken } from '../../util/auth'
 import { ErrorCTX } from '../../Context/Context'
 
 function ResultCard () {

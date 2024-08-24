@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { useContext, useEffect, useState } from 'react';
-import { getAuthToken } from '../../Util/auth';
+import { getAuthToken } from '../../util/auth';
 import Toaster from '../../UI/Toaster';
 import { useNavigate } from 'react-router-dom';
 import { ErrorCTX } from '../../Context/Context';

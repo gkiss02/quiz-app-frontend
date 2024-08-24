@@ -4,7 +4,7 @@ import Winners from '../Components/Winners/Winners';
 import Rank from '../Components/Rank/Rank';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getAuthToken } from '../Util/auth';
+import { getAuthToken } from '../util/auth';
 import { UserWithScore } from '../Types/UserWithScore';
 import { CircularProgress } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
