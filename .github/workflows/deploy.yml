@@ -87,7 +87,8 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v3        concurrency:
+        uses: actions/deploy-pages@v3        
+        concurrency:
           group: "pages"
           cancel-in-progress: false
         jobs:
