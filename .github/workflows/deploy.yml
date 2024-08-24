@@ -16,8 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v        name: Deploy to GitHub Pages
-        
+        uses: actions/checkout@v        
+        name: Deploy to GitHub Pages
         on:
           push:
             branches:
