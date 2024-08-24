@@ -19,6 +19,9 @@ jobs:
         with:
           node-version: '16' # or specify your project's Node.js version
 
+      - name: Disable CI environment variable
+        run: unset CI
+
       - name: Install dependencies
         run: npm install
 
