@@ -20,7 +20,7 @@ function Leaderboard () {
         (async function () {
             setLoading(true);
             try {
-            const response = await fetch(`http://localhost:8080/rankings/${selected}`, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/rankings/${selected}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + getAuthToken()
