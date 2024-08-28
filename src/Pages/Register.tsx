@@ -39,6 +39,7 @@ function Register () {
                     arr.push(error);
                 })
                 setErrors(arr);
+                return;
             }
             
             successToasterState.setSuccess(true);

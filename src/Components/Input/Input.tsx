@@ -17,7 +17,7 @@ const Input : React.FC<(InputProps)> = (props) => {
     }
 
     return (
-        <>
+        <div>
             <input 
                 type={props.type} 
                 className={`${styles.input} 
@@ -26,7 +26,7 @@ const Input : React.FC<(InputProps)> = (props) => {
                 onChange={changeHandler}
             />
             {props.isValid && <p className={styles['error-text']}>{props.errorMessage}</p>}
-        </>
+        </div>
     )
 }
 

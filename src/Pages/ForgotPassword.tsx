@@ -5,12 +5,14 @@ import BlueButton from '../UI/BlueButton';
 import styles from './ForgotPassword.module.css';
 import { useNavigate } from 'react-router-dom';
 import { ErrorCTX, SuccessCTX } from '../Context/Context';
+import { BackendError } from '../Types/BackendError';
 
 function ForgotPassword() {
     const [email, setEmail] = useState<string>();
     const navigate = useNavigate();
     const errorToasterState = useContext(ErrorCTX);
     const successToasterState = useContext(SuccessCTX);
+    const [error, setError] = useState<string>();
 
     async function sendEmail() {
         try {
@@ -27,6 +29,11 @@ function ForgotPassword() {
 
             if (data.error) {
                 throw new Error(data.error);
+            }
+
+            if (response.status === 400) {
+                setError(data.message);
+                return;
             }
 
             successToasterState.setSuccess(true);
@@ -48,6 +55,7 @@ function ForgotPassword() {
                 type='email'
                 placeholder='Email'
                 setValue={setEmail}
+                isValid={!!error}
             />
             <BlueButton onClick={sendEmail} isBig={true}>Send Email</BlueButton>
         </FormContainer>

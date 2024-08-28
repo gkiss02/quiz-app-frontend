@@ -1,11 +1,9 @@
 import styles from './Settings.module.css';
 import BlueButton from '../UI/BlueButton';
 import ButtonContainer from '../UI/ButtonContainer';
-import Switch from '@mui/material/Switch';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef, useContext } from 'react';
 import { getAuthToken } from '../util/auth';
-import { User } from '../Types/User';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faCheck } from '@fortawesome/free-solid-svg-icons';
 import DeleteModal from '../Components/DeleteModal/DeleteModal';
@@ -18,7 +16,6 @@ function Settings() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
-  const [user, setUser] = useState<User>();
   const [profilePicture, setProfilePicture] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [emailError, setEmailError] = useState<BackendError[]>([]);
@@ -160,7 +157,6 @@ function Settings() {
         });
 
         const data = await response.json();
-        setUser(data);
         setProfilePicture(data.profilePicture);
         setEmail(data.email);
 
@@ -198,7 +194,7 @@ function Settings() {
       <div className={styles['element-container']}>
         <h2>Email</h2>
         <div className={styles['input-container']}>
-          <input type='email' placeholder={email} className={`${styles.input} ${emailError.length > 0 && styles['error-border']}`} ref={emailRef}></input>
+          <input type='email' defaultValue={email} className={`${styles.input} ${emailError.length > 0 && styles['error-border']}`} ref={emailRef}></input>
           <p className={styles['error-text']}>{emailError.length > 0 && emailError[0].msg}</p>
           <ButtonContainer>
             <BlueButton onClick={updateEmail}>{emailSaving ? 'Saving...' : 'Save'}</BlueButton>
@@ -216,12 +212,6 @@ function Settings() {
           <ButtonContainer>
             <BlueButton onClick={updatePassword}>{passwordSaving ? 'Saving...' : 'Save'}</BlueButton>
           </ButtonContainer>
-        </div>
-      </div>
-      <div className={styles['element-container']}>
-        <div className={styles['single-item']}>
-          <h2>Dark mode</h2>
-          <Switch></Switch>
         </div>
       </div>
       <div className={styles['delete-button_container']}>
